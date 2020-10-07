@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState} from 'react'
 import { connect } from 'react-redux'
 import { fetchCities } from '../../redux/getCity/getCityActions'
 
-function CitiesContainer({ searchString, citiesData, fetchCities }) {
-    console.log(citiesData.cities)
-    console.log(fetchCities)
-    console.log(searchString)
+function CitiesContainer({ userInput, citiesData, fetchCities }) {
     useEffect(() => {
         fetchCities()
-    }, [])
+    }, [userInput]) //maybe [] its ok
 
     return (
         citiesData.loading ? <h2>Loading...</h2> :
