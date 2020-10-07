@@ -1,11 +1,16 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchCities } from '../../redux/getCity/getCityActions'
 
 function CitiesContainer({ userInput, citiesData, fetchCities }) {
     useEffect(() => {
         fetchCities()
-    }, [userInput]) //maybe [] its ok
+    }, [])
+
+
+    const callFetchWeather = (locationKey) => {
+        console.log(locationKey)
+    }
 
     return (
         citiesData.loading ? <h2>Loading...</h2> :
@@ -14,7 +19,7 @@ function CitiesContainer({ userInput, citiesData, fetchCities }) {
                     <h2>Cities List</h2>
                     <div>{citiesData &&
                         citiesData.cities &&
-                        citiesData.cities.map(city => <p>{city.LocalizedName}</p>)}</div>
+                        citiesData.cities.map(city => <button key={city.key} onClick={() => callFetchWeather(city.Key)} >{city.LocalizedName}</button>)}</div>
                 </div>
     )
 }
