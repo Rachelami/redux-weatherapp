@@ -73,8 +73,8 @@ const HomePage = ({ searchString }) => {
                     onChange={switchToFahrenheit}
                 />
             </Form>
-            <CitiesContainer userInput={searchString}/>
-            {!cityContext &&
+            <CitiesContainer/>
+            {/* {!cityContext &&
                 <div className="location-card">
                     {allCitiesWeather.map((cityWeather) => (
                         <>
@@ -88,7 +88,7 @@ const HomePage = ({ searchString }) => {
                         </>
                     ))}
                 </div>
-            }
+            } */}
             {cityContext && <FavoriteCityDetails presentFahrenheit={presentFahrenheit} />}
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
         </>

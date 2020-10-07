@@ -10,10 +10,10 @@ const Weatherinfo = ({ fiveDaysForecasts, weatherData }) => {
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
-    useEffect(() => {
-        console.log("fiveDaysForecasts")
-        console.log(fiveDaysForecasts.fiveDaysForecasts)
-    })
+    // useEffect(() => {
+    //     console.log("fiveDaysForecasts")
+    //     console.log(fiveDaysForecasts.fiveDaysForecasts)
+    // })
 
     return (
         <>

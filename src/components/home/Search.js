@@ -3,7 +3,7 @@ import { FormControl } from 'react-bootstrap'
 import { CityContext } from '../CityContext'
 import Toast from '../Toast'
 import { fetchCities } from '../../redux/getCity/getCityActions'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const Search = (props) => {
     const [input, setInput] = useState('tel aviv')
@@ -21,7 +21,7 @@ const Search = (props) => {
     }
 
     useEffect(() => {
-        props.specifySearch(input)
+        // props.specifySearch(input)
         dispatch(fetchCities(input)) //added
 
     }, [input])
