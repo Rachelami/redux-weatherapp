@@ -27,19 +27,12 @@ const fetchcurrentWeatherFailure = error => {
 }
 
 export const fetchcurrentWeather = (locationKey) => { //special. return a function(not have to be pure) and not an action
-    console.log("locationKey from fetchcurrentWeather")
-    console.log(locationKey)
     return (dispatch) => {
         dispatch(fetchcurrentWeatherRequest)
-        console.log("return dispatch")
-
-        // const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/215854`
         const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}`
         const query = `?apikey=${apiKey}&language=en-us`
         axios.get(currentLocation + query)
             .then(response => {
-                console.log("response from currentLocation")
-                console.log(response)
                 const weather = response.data
                 dispatch(fetchcurrentWeatherSuccess(weather))
             })

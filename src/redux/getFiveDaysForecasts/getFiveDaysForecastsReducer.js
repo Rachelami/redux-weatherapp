@@ -1,32 +1,33 @@
 import {
-    FETCH_CITIES_REQUEST,
-    FETCH_CITIES_SUCCESS,
-    FETCH_CITIES_FAILURE
-} from './getCityTypes'
+    FETCH_FIVE_DAYS_FORECASTS_REQUEST,
+    FETCH_FIVE_DAYS_FORECASTS_SUCCESS,
+    FETCH_FIVE_DAYS_FORECASTS_FAILURE
+} from './getFiveDaysForecastsTypes'
 
 const initialState = {
     loading: false,
-    cities: [],
+    fiveDaysForecasts: [],
     error: ''
 }
 
 const reducer = (state = initialState, action) => {
+    console.log(action.type);
     switch (action.type) {
-        case FETCH_CITIES_REQUEST:
+        case FETCH_FIVE_DAYS_FORECASTS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case FETCH_CITIES_SUCCESS:
+        case FETCH_FIVE_DAYS_FORECASTS_SUCCESS:
             return {
                 loading: false,
-                cities: action.payload,
+                fiveDaysForecasts: action.payload,
                 error: ''
             }
-        case FETCH_CITIES_FAILURE:
+        case FETCH_FIVE_DAYS_FORECASTS_FAILURE:
             return {
                 loading: false,
-                cities: [],
+                fiveDaysForecasts: [],
                 error: action.payload
             }
         default: return state

@@ -27,8 +27,6 @@ const fetchCitiesFailure = error => {
 }
 
 export const fetchCities = (userInput) => { //special. return a function(not have to be pure) and not an action
-    console.log("userInput from fetchCitiesRequest")
-    console.log(userInput)
     return (dispatch) => {
         dispatch(fetchCitiesRequest)
         const cities = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete'
@@ -36,8 +34,6 @@ export const fetchCities = (userInput) => { //special. return a function(not hav
         const query = `?apikey=${apiKey}&q=${userInput}`
         axios.get(cities + query)
             .then(response => {
-                console.log(response)
-                // console.log(response.json())
                 const cities = response.data
                 dispatch(fetchCitiesSuccess(cities))
             })

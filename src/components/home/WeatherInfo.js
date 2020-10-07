@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
+import DailyWeather from './DailyWeather'
 
-const Weatherinfo = ({ weatherData }) => {
+const Weatherinfo = ({ fiveDaysForecasts, weatherData }) => {
     const [presentFahrenheit, setPresentFahrenheit] = useState(false)
 
     const capitalize = (string) => {
@@ -10,7 +11,8 @@ const Weatherinfo = ({ weatherData }) => {
     }
 
     useEffect(() => {
-        console.log(weatherData)
+        console.log("fiveDaysForecasts")
+        console.log(fiveDaysForecasts.fiveDaysForecasts)
     })
 
     return (
@@ -30,6 +32,18 @@ const Weatherinfo = ({ weatherData }) => {
                                 <div>{Math.round(weatherData.currentWeather[0].Temperature.Metric.Value)}&deg;C</div>
                             }
                         </div>
+
+                        < div className="five-days-container" >
+                            {fiveDaysForecasts &&
+                                fiveDaysForecasts.fiveDaysForecasts.DailyForecasts &&
+                                fiveDaysForecasts.fiveDaysForecasts.DailyForecasts.map((dailyForecast) => (
+                                    <DailyWeather key={dailyForecast.Date} dailyForecast={dailyForecast} presentFahrenheit={presentFahrenheit} />
+                                ))
+                            }
+                        </div>
+
+
+
                     </div>
                 </div>
             }
@@ -37,13 +51,16 @@ const Weatherinfo = ({ weatherData }) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        citiesData: state.cities,
-        weatherData: state.weather
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         citiesData: state.cities,
+//         weatherData: state.weather,
+//         fiveDaysForecasts: state.fiveDaysForecasts
+//     }
+// }
 
-export default connect(
-    mapStateToProps
-)(Weatherinfo)
+// export default connect(
+//     mapStateToProps
+// )(Weatherinfo)
+
+export default Weatherinfo
