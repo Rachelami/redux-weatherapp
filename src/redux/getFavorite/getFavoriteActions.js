@@ -8,7 +8,7 @@ const isFavorite = favorites => {
 }
 
 
-export const handleFavorites = (favoriteCity) => { //special. return a function(not have to be pure) and not an action
+export const handleFavorites = (favoriteCity) => {
     return (dispatch) => {
         dispatch(isFavorite(favoriteCity))
     }

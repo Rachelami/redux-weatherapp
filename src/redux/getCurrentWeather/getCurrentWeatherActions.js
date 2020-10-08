@@ -26,7 +26,7 @@ const fetchcurrentWeatherFailure = error => {
     }
 }
 
-export const fetchcurrentWeather = (locationKey) => { //special. return a function(not have to be pure) and not an action
+export const fetchcurrentWeather = (locationKey) => {
     return (dispatch) => {
         dispatch(fetchcurrentWeatherRequest)
         const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}`

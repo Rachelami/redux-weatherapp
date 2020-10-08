@@ -36,8 +36,8 @@ const CityName = ({ city, presentFahrenheit, fiveDaysForecasts, weatherData }) =
 
     const callFetchWeather = (locationKey) => {
         console.log(locationKey)
-        dispatch(fetchcurrentWeather(locationKey)) //added
-        dispatch(fetchfiveDaysForecasts(locationKey)) //added
+        dispatch(fetchcurrentWeather(locationKey)) 
+        dispatch(fetchfiveDaysForecasts(locationKey)) 
     }
 
     return (
@@ -59,7 +59,6 @@ const CityName = ({ city, presentFahrenheit, fiveDaysForecasts, weatherData }) =
 
 const mapStateToProps = state => {
     return {
-        // citiesData: state.cities,
         weatherData: state.weather,
         fiveDaysForecasts: state.fiveDaysForecasts,
         favorites: state.favorites
@@ -68,10 +67,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        //fetchCities: () => dispatch(fetchCities()), // fetchCities() is the action creator
-        fetchcurrentWeather: () => dispatch(fetchcurrentWeather()), // fetchcurrentWeather() is the action creator
-        fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()), // fetchcurrentWeather() is the action creator
-        handleFavorites: () => dispatch(handleFavorites()) // fetchcurrentWeather() is the action creator
+        fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
+        fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
+        handleFavorites: () => dispatch(handleFavorites())
     }
 }
 

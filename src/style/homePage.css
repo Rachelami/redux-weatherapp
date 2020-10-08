@@ -49,9 +49,9 @@
 
 .favorite-logo {
     height: 20px;
-    position: absolute;
+    /* position: absolute;
     right: -25px;
-    top: 12px;
+    top: 12px; */
 }
 
 /* DailyWeather */
@@ -94,4 +94,23 @@
     right: 7%;
     top: 10px;
     height: 20px;
+}
+
+
+/* CitiesContainer */
+.city-name {
+    width: 72vw;
+    border-radius: 20px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.city-name:focus {
+    outline: none;
+}
+
+.space {
+    justify-content: space-between;
 }

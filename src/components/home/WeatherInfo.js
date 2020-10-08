@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import { connect } from 'react-redux'
 import DailyWeather from './DailyWeather'
 
 const Weatherinfo = ({ fiveDaysForecasts, weatherData }) => {
@@ -9,11 +8,6 @@ const Weatherinfo = ({ fiveDaysForecasts, weatherData }) => {
         if (typeof string !== 'string') return ''
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
-
-    // useEffect(() => {
-    //     console.log("fiveDaysForecasts")
-    //     console.log(fiveDaysForecasts.fiveDaysForecasts)
-    // })
 
     return (
         <>
@@ -50,17 +44,5 @@ const Weatherinfo = ({ fiveDaysForecasts, weatherData }) => {
         </>
     )
 }
-
-// const mapStateToProps = state => {
-//     return {
-//         citiesData: state.cities,
-//         weatherData: state.weather,
-//         fiveDaysForecasts: state.fiveDaysForecasts
-//     }
-// }
-
-// export default connect(
-//     mapStateToProps
-// )(Weatherinfo)
 
 export default Weatherinfo

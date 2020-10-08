@@ -56,7 +56,10 @@
 
 @media (max-width: 670px) {
     .weather-strip {
-        width: 80vw;
+        width: 90vw !important;
+    }
+    .city-name {
+        width: 93vw !important;
     }
     .location-card {
         flex-direction: row;

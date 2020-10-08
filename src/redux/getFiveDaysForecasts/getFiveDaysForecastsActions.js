@@ -26,9 +26,7 @@ const fetchfiveDaysForecastsFailure = error => {
     }
 }
 
-export const fetchfiveDaysForecasts = (locationKey) => { //special. return a function(not have to be pure) and not an action
-    // console.log("locationKey from fetchfiveDaysForecasts")
-    // console.log(locationKey)
+export const fetchfiveDaysForecasts = (locationKey) => {
     return (dispatch) => {
         dispatch(fetchfiveDaysForecastsRequest)
 
@@ -37,8 +35,6 @@ export const fetchfiveDaysForecasts = (locationKey) => { //special. return a fun
         // const query = `?apikey=${apiKey}&q=en-us&metric=${!presentFahrenheit}`
         axios.get(forecasts + query)
             .then(response => {
-                // console.log("response from fetchfiveDaysForecasts")
-                // console.log(response)
                 const fiveDaysForecasts = response.data
                 dispatch(fetchfiveDaysForecastsSuccess(fiveDaysForecasts))
             })
