@@ -8,7 +8,7 @@ const isFavorite = favorites => {
 }
 
 
-export const handleFavorites = (favoriteCity) => {
+export const handleFavorites = favoriteCity => {
     return (dispatch) => {
         dispatch(isFavorite(favoriteCity))
     }
