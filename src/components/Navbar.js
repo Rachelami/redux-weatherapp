@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Form } from 'react-bootstrap'
+import { useHistory } from "react-router-dom";
 
 const TopNavbar = () => {
     const [isFavoritePageActive, setIsFavoritePageActive] = useState(false)
@@ -7,21 +8,27 @@ const TopNavbar = () => {
     useEffect(() => {
         if (window.location.href.includes("favorite")) {
             setIsFavoritePageActive(true)
-        } 
+        }
         else {
             setIsFavoritePageActive(false)
         }
     })
 
+    const history = useHistory()
+
+    const openPage = (path) => {
+        history.push(path)
+    }
+
     return (
         <Navbar bg="light" variant="light">
             <Nav className="mr-auto">
-                <Nav.Link href="/" className={isFavoritePageActive ? null : "active"}>
+                <Nav.Link onClick={() => openPage("/")} className={isFavoritePageActive ? null : "active"}>
                     <img src={isFavoritePageActive ? process.env.PUBLIC_URL + '/images/house.png' : process.env.PUBLIC_URL + '/images/red-house.png'} className="nav-logos" />
                     Home
                 </Nav.Link>
 
-                <Nav.Link href="/favorite" className={isFavoritePageActive ? "active" : null}>
+                <Nav.Link onClick={() => openPage("/favorite")} className={isFavoritePageActive ? "active" : null}>
                     <img src={isFavoritePageActive ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="nav-logos" />
                 Favorite
                 </Nav.Link>
