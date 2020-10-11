@@ -7,30 +7,38 @@ import Weatherinfo from './WeatherInfo'
 import { connect } from 'react-redux'
 
 
-const CityName = ({ city, presentFahrenheit, fiveDaysForecasts, weatherData }) => {
+const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weatherData }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const dispatch = useDispatch() //added
 
-    // useEffect(() => {
-    //     console.log(favorites)
-    //     console.log(favorites.favorites)
-    //     const favoriteArray = favorites.favorites
-    //     if (isFavorite) {
-    //         favoriteArray.push("city weather info")
-    //     } else {
-    //         const cityIndex = favoriteArray.indexOf("city weather info")
-    //         favoriteArray.splice(cityIndex, 1);
+    // console.log("weatherData.id!!!!!!!!!!!!!!!!!!!!!!!")
+    // console.log(weatherData.id)
 
-    //         // var colors = ["red", "blue", "car", "green"];
-    //         // var carIndex = colors.indexOf("car");//get  "car" index
-    //         // //remove car from the colors array
-    //         // colors.splice(carIndex, 1); // colors = ["red","blue","green"]
-    //     }
-    //     dispatch(handleFavorites(favoriteArray))
+    useEffect(() => {
+        console.log("is favorit?????")
+        console.log(isFavorite)
+        console.log(favorites)
+        console.log(favorites.favorites)
+        const favoriteArray = favorites.favorites
+        if (isFavorite) {
+            favoriteArray.push(city)
+            console.log(city)
+        } else {
+            const cityIndex = favoriteArray.indexOf(city)
+            favoriteArray.splice(cityIndex, 1);
 
-    // }, [isFavorite])
+            // var colors = ["red", "blue", "car", "green"];
+            // var carIndex = colors.indexOf("car");//get  "car" index
+            // //remove car from the colors array
+            // colors.splice(carIndex, 1); // colors = ["red","blue","green"]
+        }
+        dispatch(handleFavorites(favoriteArray))
+
+    }, [isFavorite])
 
     const favorite = () => {
+        console.log("favorite!!!!!!!!")
+
         setIsFavorite(isFavorite ? false : true)
     }
 
@@ -47,7 +55,7 @@ const CityName = ({ city, presentFahrenheit, fiveDaysForecasts, weatherData }) =
                     <div>{city.LocalizedName}</div>
                     <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo" onClick={() => favorite()} />
                 </div>
-                {fiveDaysForecasts && weatherData &&
+                {weatherData.id===city.Key && fiveDaysForecasts && weatherData &&
                     <Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weatherData={weatherData} />
                 }
             </button>

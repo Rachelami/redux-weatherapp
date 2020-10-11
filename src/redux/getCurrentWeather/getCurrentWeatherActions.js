@@ -12,9 +12,10 @@ export const fetchcurrentWeatherRequest = () => {
     }
 }
 
-const fetchcurrentWeatherSuccess = weather => {
+const fetchcurrentWeatherSuccess = (weather, locationKey) => {
     return {
         type: FETCH_CURRENT_WEATHER_SUCCESS,
+        id: locationKey,
         payload: weather
     }
 }
@@ -34,7 +35,7 @@ export const fetchcurrentWeather = (locationKey) => {
         axios.get(currentLocation + query)
             .then(response => {
                 const weather = response.data
-                dispatch(fetchcurrentWeatherSuccess(weather))
+                dispatch(fetchcurrentWeatherSuccess(weather, locationKey))
             })
             .catch(error => {
                 const errorMsg = error.message

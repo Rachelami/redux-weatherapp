@@ -11,6 +11,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
+    // console.log(action.type);
     switch (action.type) {
         case FETCH_CURRENT_WEATHER_REQUEST:
             return {
@@ -20,6 +21,7 @@ const reducer = (state = initialState, action) => {
         case FETCH_CURRENT_WEATHER_SUCCESS:
             return {
                 loading: false,
+                id: action.id,
                 currentWeather: action.payload,
                 error: ''
             }
