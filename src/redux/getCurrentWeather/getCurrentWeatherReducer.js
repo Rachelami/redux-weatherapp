@@ -20,9 +20,11 @@ const reducer = (state = initialState, action) => {
             }
         case FETCH_CURRENT_WEATHER_SUCCESS:
             return {
+                // ...state,
                 loading: false,
-                id: action.id,
-                currentWeather: action.payload,
+                // id: action.id,
+                currentWeather: [...state.currentWeather, action.payload],
+                // currentWeather: [...state.currentWeather, action.payload, action.payload[0].id = action.id],
                 error: ''
             }
         case FETCH_CURRENT_WEATHER_FAILURE:

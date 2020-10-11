@@ -6,10 +6,10 @@ import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { handleFavorites } from '../../redux/getFavorite/getFavoriteActions'
 
-const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites }) => {
+const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites, locationName }) => {
     const [isFavorite, setIsFavorite] = useState(true)
     const [currentWeatherIsFetched, setcurrentWeatherIsFetched] = useState(false)
-    const [cityContext, setCityContext] = React.useContext(CityContext)
+    const [aaaa, setaaaa] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -17,21 +17,25 @@ const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites })
         setIsFavorite(isFavorite ? false : true)
     }
 
-    useEffect(() => {
-        dispatch(fetchcurrentWeather(cityWeatherInfo.Key))
-        setcurrentWeatherIsFetched(true)
-    }, [])
+    // useEffect(() => {
+    //     console.log(weatherData)
+    // })
 
+    // useEffect(() => {
+    //     dispatch(fetchcurrentWeather(cityWeatherInfo.Key, cityWeatherInfo.LocalizedName))
+    //     // console.log("cityWeatherInfo.Key!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //     // console.log(weatherData)
+    //     // console.log("weatherData!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    // }, [])
 
+    // useEffect(() => {
+    //     if (!isFavorite) {
+    //         const cityIndex = favorites.favorites.indexOf(favoriteCity)
+    //         favorites.favorites.splice(cityIndex, 1);
+    //     }
+    //     dispatch(handleFavorites(favorites.favorites))
 
-    useEffect(() => {
-        if (!isFavorite) {
-            const cityIndex = favorites.favorites.indexOf(favoriteCity)
-            favorites.favorites.splice(cityIndex, 1);
-        }
-        dispatch(handleFavorites(favorites.favorites))
-
-    }, [isFavorite])
+    // }, [isFavorite])
 
 
     const capitalize = (string) => {
@@ -41,13 +45,12 @@ const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites })
 
     return (
         <>
-            {weatherData.currentWeather[0] &&
                 <Card>
                     <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
                         <Card.Body>
-                            <Card.Title>{capitalize(cityWeatherInfo.LocalizedName)}</Card.Title>
-                            <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${weatherData.currentWeather[0].WeatherIcon}.svg`} className="favorite-temp-logos" />
-                            <Card.Text>{Math.round(weatherData.currentWeather[0].Temperature.Metric.Value)}&deg;C</Card.Text>
+                            <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
+                            <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
+                            <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>
                             {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
                         </Card.Body>
                 </Card >
@@ -61,7 +64,6 @@ const mapStateToProps = state => {
     return {
         weatherData: state.weather,
         favorites: state.favorites
-
     }
 }
 
