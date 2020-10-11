@@ -4,9 +4,9 @@ import { CityContext } from '../CityContext'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
-import { handleFavorites } from '../../redux/getFavorite/getFavoriteActions'
+import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 
-const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites, locationName }) => {
+const FavoriteCard = ({ cityWeatherInfo, index, weatherData, favoriteCity, favorites, locationName }) => {
     const [isFavorite, setIsFavorite] = useState(true)
     const [currentWeatherIsFetched, setcurrentWeatherIsFetched] = useState(false)
     const [aaaa, setaaaa] = useState(false)
@@ -28,11 +28,24 @@ const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites, l
     //     // console.log("weatherData!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     // }, [])
 
+    useEffect(() => {
+        if (isFavorite) {
+            dispatch(addToFavorite(favoriteCity))
+        } else {
+            dispatch(removeFromFavorite(index))
+        }
+    }, [isFavorite])
+
     // useEffect(() => {
     //     if (!isFavorite) {
+    //         console.log("all favprote list!!!!!!!")
+    //         console.log(favorites.favorites)
     //         const cityIndex = favorites.favorites.indexOf(favoriteCity)
+    //         console.log("remove index of"+ favoriteCity +"!!!!!!!!!!!!!")
     //         favorites.favorites.splice(cityIndex, 1);
     //     }
+    //     console.log("favorites.favorites after remove!!!!!!!!!")
+    //     console.log(favorites.favorites)
     //     dispatch(handleFavorites(favorites.favorites))
 
     // }, [isFavorite])
@@ -45,16 +58,15 @@ const FavoriteCard = ({ cityWeatherInfo, weatherData, favoriteCity, favorites, l
 
     return (
         <>
-                <Card>
-                    <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
-                        <Card.Body>
-                            <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
-                            <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
-                            <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>
-                            {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
-                        </Card.Body>
-                </Card >
-            }
+            <Card>
+                <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
+                <Card.Body>
+                    <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
+                    <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
+                    <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>
+                    {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
+                </Card.Body>
+            </Card >
         </>
     )
 }
@@ -70,7 +82,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
-        handleFavorites: () => dispatch(handleFavorites())
+        // handleFavorites: () => dispatch(handleFavorites()),
+        removeFromFavorite: () => dispatch(removeFromFavorite()),
+        addToFavorite: () => dispatch(addToFavorite())
     }
 }
 

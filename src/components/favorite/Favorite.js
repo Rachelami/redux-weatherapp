@@ -20,8 +20,8 @@ const Favorite = ({ favorites, weather }) => {
 
     return (
         <div className="favorite-container">
-            {weather && weather.currentWeather.length > 0 && weather.currentWeather.map(favoriteCity =>
-                <FavoriteCard key={favoriteCity[0][0].locationKey} cityWeatherInfo={favoriteCity[0][0]} />
+            {weather && weather.currentWeather.length > 0 && weather.currentWeather.map((favoriteCity, index) =>
+                <FavoriteCard key={favoriteCity[0][0].locationKey} cityWeatherInfo={favoriteCity[0][0]} index={index} />
             )}
         </div>
     )

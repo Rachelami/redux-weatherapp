@@ -16,8 +16,8 @@ function CitiesContainer({ citiesData, fetchCities }) {
                     <h2>Cities List</h2>
                     <div>{
                         citiesData.cities &&
-                        citiesData.cities.map(city =>
-                            <CityName key={city.Key} city={city}/>
+                        citiesData.cities.map((city, index) =>
+                            <CityName key={city.Key} city={city} index={index}/>
                         )}
                     </div>
                 </div>

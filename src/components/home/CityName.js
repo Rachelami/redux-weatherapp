@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
-import { handleFavorites } from '../../redux/getFavorite/getFavoriteActions'
+import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import Weatherinfo from './WeatherInfo'
 import { connect } from 'react-redux'
 
 
-const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weatherData }) => {
+const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weatherData, index }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const dispatch = useDispatch() //added
 
@@ -15,25 +15,33 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
     // console.log(weatherData.id)
 
     useEffect(() => {
-
-        const favoriteArray = favorites.favorites
         if (isFavorite) {
-            favoriteArray.push(city)
-            console.log(city)
+            dispatch(addToFavorite(city))
         } else {
-            const cityIndex = favoriteArray.indexOf(city)
-            favoriteArray.splice(cityIndex, 1);
-
-            // var colors = ["red", "blue", "car", "green"];
-            // var carIndex = colors.indexOf("car");//get  "car" index
-            // //remove car from the colors array
-            // colors.splice(carIndex, 1); // colors = ["red","blue","green"]
+            dispatch(removeFromFavorite(index))
         }
-        console.log("favoriteArray")
-        console.log(favoriteArray)
-        dispatch(handleFavorites(favoriteArray)) // [{},{}]
-
     }, [isFavorite])
+
+    // useEffect(() => {
+
+    //     const favoriteArray = favorites.favorites
+    //     if (isFavorite) {
+    //         favoriteArray.push(city)
+    //         console.log(city)
+    //     } else {
+    //         const cityIndex = favoriteArray.indexOf(city)
+    //         favoriteArray.splice(cityIndex, 1);
+
+    //         // var colors = ["red", "blue", "car", "green"];
+    //         // var carIndex = colors.indexOf("car");//get  "car" index
+    //         // //remove car from the colors array
+    //         // colors.splice(carIndex, 1); // colors = ["red","blue","green"]
+    //     }
+    //     console.log("favoriteArray")
+    //     console.log(favoriteArray)
+    //     dispatch(addToFavorite(favoriteArray)) // [{},{}]
+
+    // }, [isFavorite])
 
     const favorite = () => {
         setIsFavorite(isFavorite ? false : true)
@@ -71,7 +79,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
-        handleFavorites: () => dispatch(handleFavorites())
+        addToFavorite: () => dispatch(addToFavorite()),
+        removeFromFavorite: () => dispatch(removeFromFavorite())
     }
 }
 
