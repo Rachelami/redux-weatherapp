@@ -14,7 +14,7 @@ function CitiesContainer({ cities, presentFahrenheit }) {
     })
 
     return (
-            <div>
+            <>
                 <div>{
                     cities.cities &&
                     cities.cities.map((city) =>
@@ -22,13 +22,13 @@ function CitiesContainer({ cities, presentFahrenheit }) {
                     )}
                 </div>
                 {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
-            </div>
+            </>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        cities: state.cities,
+        cities: state.cities
     }
 }
 

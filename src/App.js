@@ -12,7 +12,7 @@ import CitiesContainer from './components/home/CitiesContainer'
 function App() {
   const [presentFahrenheit, setPresentFahrenheit] = useState(false)
 
-  const changeToggle = (isChecked) => {
+  const checkToggle = (isChecked) => {
     setPresentFahrenheit(isChecked)
   }
 
@@ -20,7 +20,7 @@ function App() {
 
     <div className="App">
       <TopNavbar />
-      <Toggle changeToggle={changeToggle} />
+      <Toggle changeToggle={checkToggle} />
 
       <Switch>
         <Route exact path="/">

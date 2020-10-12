@@ -6,9 +6,7 @@ import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWea
 import Toast from '../Toast'
 
 const Favorite = ({ favorites, weather, presentFahrenheit }) => {
-    const [fetchData, setFetchData] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -39,7 +37,7 @@ const Favorite = ({ favorites, weather, presentFahrenheit }) => {
 
     return (
         <div className="favorite-container">
-            {weather && weather.currentWeather.length > 0 && weather.currentWeather.map((favoriteCity) =>
+            {weather.currentWeather.length > 0 && weather.currentWeather.map((favoriteCity) =>
                 <FavoriteCard key={favoriteCity[0][0].Key} cityWeatherInfo={favoriteCity[0][0]} presentFahrenheit={presentFahrenheit}/>
             )}
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}

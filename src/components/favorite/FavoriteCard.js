@@ -9,19 +9,7 @@ import Toast from '../Toast'
 const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }) => {
     const [showCard, setShowCard] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-
     const dispatch = useDispatch()
-
-    const favorite = () => {
-        dispatch(removeFromFavorite(cityWeatherInfo.Key))
-        setShowCard(false)
-    }
-
-    useEffect(() => {
-        if (weather.error) {
-            setErrorMessage(weather.error)
-        }
-    })
 
     useEffect(() => {
         favorites.favorites.map(favoriteCity => {
@@ -29,8 +17,18 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
                 setShowCard(true)
             }
         })
-
     }, [])
+
+    useEffect(() => {
+        if (weather.error) {
+            setErrorMessage(weather.error)
+        }
+    })
+
+    const favorite = () => {
+        dispatch(removeFromFavorite(cityWeatherInfo.Key))
+        setShowCard(false)
+    }
 
     const capitalize = (string) => {
         if (typeof string !== 'string') return ''

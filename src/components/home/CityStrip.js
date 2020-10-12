@@ -12,10 +12,7 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     const [isFavorite, setIsFavorite] = useState(false)
     const [expended, setExpended] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-
     const dispatch = useDispatch()
-
-
 
     useEffect(() => {
         if (weather.error) {
@@ -44,16 +41,13 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
         if (isFavorite) {
             dispatch(removeFromFavorite(city.Key))
             setIsFavorite(false)
-
         } else {
             dispatch(addToFavorite(city))
             setIsFavorite(true)
-
         }
     }
 
     const callFetchWeather = (Key) => {
-        console.log('onclick!!!!!!!')
         dispatch(fetchcurrentWeather(Key, city.LocalizedName))
         dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
         setExpended(true)

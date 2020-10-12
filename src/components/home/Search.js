@@ -9,6 +9,11 @@ const Search = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        if (input !== '')
+            dispatch(fetchCities(input))
+    }, [input])
+
     const handleChange = (event) => {
         if (verifyInput(event.target.value)) {
             setInput(event.target.value)
@@ -16,12 +21,6 @@ const Search = () => {
             setErrorMessage('Invalid Character')
         }
     }
-
-    useEffect(() => {
-        if (input !== '')
-            dispatch(fetchCities(input))
-
-    }, [input])
 
     const verifyInput = (input) => {
         const acceptedCharacters = /^[A-Za-z\s]+$/

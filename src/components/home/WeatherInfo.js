@@ -9,33 +9,29 @@ const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
     }
 
     return (
-        <>
-            {weather &&
-                <div className="weather-strip-container">
-                    <div className="weather-strip">
-                        <div className="weather-info-container">
-                            <div className="flex">
-                                <img src={process.env.PUBLIC_URL + `/images/weather-icons/${weather.WeatherIcon}.svg`} className="temp-logos" />
-                                <div>{capitalize(weather.WeatherText)}</div>
-                            </div>
-                            {presentFahrenheit ?
-                                <div>{Math.round(weather.Temperature.Imperial.Value)}&deg;F</div> :
-                                <div>{Math.round(weather.Temperature.Metric.Value)}&deg;C</div>
-                            }
-                        </div>
-
-                        < div className="five-days-container" >
-                            {fiveDaysForecasts &&
-                                fiveDaysForecasts.fiveDaysForecasts.DailyForecasts &&
-                                fiveDaysForecasts.fiveDaysForecasts.DailyForecasts.map((dailyForecast) => (
-                                    <DailyWeather key={dailyForecast.Date} dailyForecast={dailyForecast} presentFahrenheit={presentFahrenheit} />
-                                ))
-                            }
-                        </div>
+        <div className="weather-strip-container">
+            <div className="weather-strip">
+                <div className="weather-info-container">
+                    <div className="flex">
+                        <img src={process.env.PUBLIC_URL + `/images/weather-icons/${weather.WeatherIcon}.svg`} className="temp-logos" />
+                        <div>{capitalize(weather.WeatherText)}</div>
                     </div>
+                    {presentFahrenheit ?
+                        <div>{Math.round(weather.Temperature.Imperial.Value)}&deg;F</div> :
+                        <div>{Math.round(weather.Temperature.Metric.Value)}&deg;C</div>
+                    }
                 </div>
-            }
-        </>
+
+                < div className="five-days-container" >
+                    {fiveDaysForecasts &&
+                        fiveDaysForecasts.fiveDaysForecasts.DailyForecasts &&
+                        fiveDaysForecasts.fiveDaysForecasts.DailyForecasts.map((dailyForecast) => (
+                            <DailyWeather key={dailyForecast.Date} dailyForecast={dailyForecast} presentFahrenheit={presentFahrenheit} />
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
     )
 }
 
