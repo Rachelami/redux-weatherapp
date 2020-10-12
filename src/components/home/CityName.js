@@ -22,10 +22,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
     // }, [isFavorite])
 
     useEffect(() => {
-        console.log(favorites.favorites)
         favorites.favorites.map(favoriteCity => {
-            console.log(favoriteCity)
-
             if (favoriteCity.Key === city.Key)
                 setIsFavorite(true)
         })

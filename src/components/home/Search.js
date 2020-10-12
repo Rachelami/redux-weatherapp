@@ -6,7 +6,7 @@ import { fetchCities } from '../../redux/getCity/getCityActions'
 import { useDispatch } from 'react-redux'
 
 const Search = (props) => {
-    const [input, setInput] = useState('tel aviv')
+    const [input, setInput] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [, setCityContext] = React.useContext(CityContext)
     const dispatch = useDispatch() //added
@@ -22,7 +22,8 @@ const Search = (props) => {
 
     useEffect(() => {
         // props.specifySearch(input)
-        dispatch(fetchCities(input)) //added
+        if (input !== '')
+            dispatch(fetchCities(input)) //added
 
     }, [input])
 

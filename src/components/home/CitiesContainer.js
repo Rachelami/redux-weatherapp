@@ -5,9 +5,9 @@ import CityName from './CityName'
 
 function CitiesContainer({ citiesData, fetchCities }) {
 
-    useEffect(() => {
-        fetchCities()
-    }, [])
+    // useEffect(() => {
+    //     fetchCities()
+    // }, [])
 
     return (
         // citiesData.loading ? <h2>Loading...</h2> :

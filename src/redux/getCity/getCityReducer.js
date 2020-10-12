@@ -6,7 +6,10 @@ import {
 
 const initialState = {
     loading: false,
-    cities: [],
+    cities: [{
+        Key: "215854",
+        LocalizedName: "Tel Aviv"
+    }],
     error: ''
 }
 
