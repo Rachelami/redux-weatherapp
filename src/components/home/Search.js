@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { FormControl } from 'react-bootstrap'
-import { CityContext } from '../AACityContext'
 import Toast from '../Toast'
 import { fetchCities } from '../../redux/getCity/getCityActions'
 import { useDispatch } from 'react-redux'
 
-const Search = (props) => {
+const Search = () => {
     const [input, setInput] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
-    const [, setCityContext] = React.useContext(CityContext)
     const dispatch = useDispatch()
 
     const handleChange = (event) => {
-        setCityContext('')
         if (verifyInput(event.target.value)) {
             setInput(event.target.value)
         } else {

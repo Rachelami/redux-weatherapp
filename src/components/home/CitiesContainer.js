@@ -14,9 +14,7 @@ function CitiesContainer({ cities, presentFahrenheit }) {
     })
 
     return (
-        cities.error ? <h2>{cities.error}</h2> :
             <div>
-                <h2>Cities List</h2>
                 <div>{
                     cities.cities &&
                     cities.cities.map((city) =>
@@ -24,7 +22,6 @@ function CitiesContainer({ cities, presentFahrenheit }) {
                     )}
                 </div>
                 {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
-
             </div>
     )
 }
