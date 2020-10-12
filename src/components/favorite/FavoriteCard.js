@@ -6,7 +6,7 @@ import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWea
 import { removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import Toast from '../Toast'
 
-const FavoriteCard = ({ cityWeatherInfo, weather, favorites }) => {
+const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }) => {
     const [showCard, setShowCard] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
@@ -45,7 +45,9 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites }) => {
                     <Card.Body>
                         <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
                         <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
-                        <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>
+                        {presentFahrenheit? 
+                        <Card.Text>{Math.round(cityWeatherInfo.Temperature.Imperial.Value)}&deg;F</Card.Text>:
+                        <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}
                         {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
                     </Card.Body>
                 </Card >

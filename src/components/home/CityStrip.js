@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import Toast from '../Toast'
 
 
-const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
+const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const [expended, setExpended] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -34,10 +34,12 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
     }, [])
 
     useEffect(() => {
-        dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
+        if (expended) {
+            dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
+        }
     }, [presentFahrenheit])
 
-   
+
     const favorite = () => {
         if (isFavorite) {
             dispatch(removeFromFavorite(city.Key))
@@ -51,6 +53,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
     }
 
     const callFetchWeather = (Key) => {
+        console.log('onclick!!!!!!!')
         dispatch(fetchcurrentWeather(Key, city.LocalizedName))
         dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
         setExpended(true)
@@ -91,4 +94,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CityName)
+)(CityStrip)

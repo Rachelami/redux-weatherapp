@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
-import CitiesContainer from './CitiesContainer'
 
-const HomePage = () => {
+const Toggle = (props) => {
     const [presentFahrenheit, setPresentFahrenheit] = useState(false)
 
     const switchToFahrenheit = (event) => {
         setPresentFahrenheit(event.target.checked)
     }
 
+    useEffect(() => {
+        props.changeToggle(presentFahrenheit)
+    }, [presentFahrenheit])
+
     return (
-        <>
             <Form className="switch-to-fahrenheit-continer">
                 <Form.Check
                     type="switch"
@@ -19,11 +21,7 @@ const HomePage = () => {
                     onChange={switchToFahrenheit}
                 />
             </Form>
-
-            <CitiesContainer presentFahrenheit={presentFahrenheit}/>
-
-        </>
     )
 }
 
-export default HomePage
+export default Toggle

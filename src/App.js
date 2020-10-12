@@ -3,35 +3,34 @@ import { Switch, Route } from "react-router-dom"
 import './style/mainStyle.css'
 import './style/favorite.css'
 import './style/homePage.css'
-import HomePage from './components/home/HomePage'
+import Toggle from './components/home/Toggle'
 import TopNavbar from './components/Navbar.js'
 import Favorite from './components/favorite/Favorite'
 import Search from './components/home/Search'
-
-
-
-
+import CitiesContainer from './components/home/CitiesContainer'
 
 function App() {
-  const [searchString, setSearchString] = useState('')
+  const [presentFahrenheit, setPresentFahrenheit] = useState(false)
 
-  const specifySearch = (userInput) => {
-    setSearchString(userInput)
+  const changeToggle = (isChecked) => {
+    setPresentFahrenheit(isChecked)
   }
 
   return (
 
     <div className="App">
       <TopNavbar />
-      <Switch>
-            <Route exact path="/">
-              <Search specifySearch={specifySearch} />
-              <HomePage searchString={searchString} />
-            </Route>
+      <Toggle changeToggle={changeToggle} />
 
-            <Route exact path="/favorite">
-              <Favorite />
-            </Route>
+      <Switch>
+        <Route exact path="/">
+          <Search />
+          <CitiesContainer presentFahrenheit={presentFahrenheit} />
+        </Route>
+
+        <Route exact path="/favorite">
+          <Favorite presentFahrenheit={presentFahrenheit}/>
+        </Route>
       </Switch>
     </div>
   );

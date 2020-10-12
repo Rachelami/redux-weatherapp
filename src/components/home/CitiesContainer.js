@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchCities } from '../../redux/getCity/getCityActions'
-import CityName from './CityName'
+import CityStrip from './CityStrip'
 import Toast from '../Toast'
 
 function CitiesContainer({ cities, presentFahrenheit }) {
@@ -18,7 +18,7 @@ function CitiesContainer({ cities, presentFahrenheit }) {
                 <div>{
                     cities.cities &&
                     cities.cities.map((city) =>
-                        <CityName key={city.Key} city={city} presentFahrenheit={presentFahrenheit} />
+                        <CityStrip key={city.Key} city={city} presentFahrenheit={presentFahrenheit} />
                     )}
                 </div>
                 {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
