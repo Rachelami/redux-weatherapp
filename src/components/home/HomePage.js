@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
-// import { CityContext } from '../CityContext'
-// import FavoriteCityDetails from '../favorite/FavoriteCityDetails'
-// import Toast from '../Toast'
 import CitiesContainer from './CitiesContainer'
 
-const HomePage = ({ searchString }) => {
+const HomePage = () => {
     const [presentFahrenheit, setPresentFahrenheit] = useState(false)
-    // const [errorMessage, setErrorMessage] = useState('')
-    // const [cityContext] = React.useContext(CityContext)
 
     const switchToFahrenheit = (event) => {
         setPresentFahrenheit(event.target.checked)
@@ -27,7 +22,6 @@ const HomePage = ({ searchString }) => {
 
             <CitiesContainer presentFahrenheit={presentFahrenheit}/>
 
-            {/* {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />} */} 
         </>
     )
 }

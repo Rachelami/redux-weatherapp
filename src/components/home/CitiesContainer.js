@@ -4,7 +4,7 @@ import { fetchCities } from '../../redux/getCity/getCityActions'
 import CityName from './CityName'
 import Toast from '../Toast'
 
-function CitiesContainer({ cities, fetchCities, presentFahrenheit }) {
+function CitiesContainer({ cities, presentFahrenheit }) {
     const [errorMessage, setErrorMessage] = useState('')
 
     useEffect(() => {
@@ -14,7 +14,6 @@ function CitiesContainer({ cities, fetchCities, presentFahrenheit }) {
     })
 
     return (
-        // cities.loading ? <h2>Loading...</h2> :
         cities.error ? <h2>{cities.error}</h2> :
             <div>
                 <h2>Cities List</h2>
