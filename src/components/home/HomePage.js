@@ -27,8 +27,7 @@ const HomePage = ({ searchString }) => {
 
             <CitiesContainer presentFahrenheit={presentFahrenheit}/>
 
-            {/* {cityContext && <FavoriteCityDetails presentFahrenheit={presentFahrenheit} />}
-            {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />} */}
+            {/* {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />} */} 
         </>
     )
 }

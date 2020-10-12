@@ -5,13 +5,26 @@ import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFive
 import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import Weatherinfo from './WeatherInfo'
 import { connect } from 'react-redux'
+import Toast from '../Toast'
 
 
 const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const [expended, setExpended] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
     const dispatch = useDispatch() //added
 
+
+
+    useEffect(() => {
+        if (weather.error) {
+            setErrorMessage(weather.error)
+        }
+        if (fiveDaysForecasts.error) {
+            setErrorMessage(fiveDaysForecasts.error)
+        }
+    })
 
     // useEffect(() => {
     //     if (isFavorite) {
@@ -84,6 +97,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
                 }
             </button>
             <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo" onClick={() => favorite()} />
+            {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
         </div>
     )
 }

@@ -2,31 +2,37 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { fetchCities } from '../../redux/getCity/getCityActions'
 import CityName from './CityName'
+import Toast from '../Toast'
 
-function CitiesContainer({ citiesData, fetchCities, presentFahrenheit }) {
+function CitiesContainer({ cities, fetchCities, presentFahrenheit }) {
+    const [errorMessage, setErrorMessage] = useState('')
 
-    // useEffect(() => {
-    //     fetchCities()
-    // }, [])
+    useEffect(() => {
+        if (cities.error) {
+            setErrorMessage(cities.error)
+        }
+    })
 
     return (
-        // citiesData.loading ? <h2>Loading...</h2> :
-            citiesData.error ? <h2>{citiesData.error}</h2> :
-                <div>
-                    <h2>Cities List</h2>
-                    <div>{
-                        citiesData.cities &&
-                        citiesData.cities.map((city) =>
-                            <CityName key={city.Key} city={city}  presentFahrenheit={presentFahrenheit}/>
-                        )}
-                    </div>
+        // cities.loading ? <h2>Loading...</h2> :
+        cities.error ? <h2>{cities.error}</h2> :
+            <div>
+                <h2>Cities List</h2>
+                <div>{
+                    cities.cities &&
+                    cities.cities.map((city) =>
+                        <CityName key={city.Key} city={city} presentFahrenheit={presentFahrenheit} />
+                    )}
                 </div>
+                {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
+
+            </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        citiesData: state.cities,
+        cities: state.cities,
     }
 }
 

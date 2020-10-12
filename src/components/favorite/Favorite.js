@@ -3,12 +3,19 @@ import FavoriteCard from './FavoriteCard'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
+import Toast from '../Toast'
 
 const Favorite = ({ favorites, weather }) => {
     const [fetchData, setFetchData] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        if (weather.error) {
+            setErrorMessage(weather.error)
+        }
+    })
 
     useEffect(() => {
         if (favorites.favorites) {
@@ -64,6 +71,8 @@ const Favorite = ({ favorites, weather }) => {
             {weather && weather.currentWeather.length > 0 && weather.currentWeather.map((favoriteCity) =>
                 <FavoriteCard key={favoriteCity[0][0].Key} cityWeatherInfo={favoriteCity[0][0]} />
             )}
+                            {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
+
         </div>
     )
 }
