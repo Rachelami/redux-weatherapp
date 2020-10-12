@@ -30,9 +30,9 @@ const FavoriteCard = ({ cityWeatherInfo, index, weatherData, favoriteCity, favor
 
     useEffect(() => {
         if (isFavorite) {
-            dispatch(addToFavorite(favoriteCity))
+            dispatch(addToFavorite(cityWeatherInfo))
         } else {
-            dispatch(removeFromFavorite(index))
+            dispatch(removeFromFavorite(cityWeatherInfo.Key))
         }
     }, [isFavorite])
 
@@ -58,15 +58,17 @@ const FavoriteCard = ({ cityWeatherInfo, index, weatherData, favoriteCity, favor
 
     return (
         <>
-            <Card>
-                <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
-                <Card.Body>
-                    <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
-                    <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
-                    <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>
-                    {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
-                </Card.Body>
-            </Card >
+            {isFavorite &&
+                <Card>
+                    <img src={process.env.PUBLIC_URL + '/images/yellow-star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
+                    <Card.Body>
+                        <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
+                        <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
+                        <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>
+                        {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
+                    </Card.Body>
+                </Card >
+            }
         </>
     )
 }

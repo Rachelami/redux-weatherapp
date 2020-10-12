@@ -12,11 +12,11 @@ export const fetchcurrentWeatherRequest = () => {
     }
 }
 
-const fetchcurrentWeatherSuccess = (weather, locationKey, locationName) => {
+const fetchcurrentWeatherSuccess = (weather, Key, locationName) => {
     return {
         type: FETCH_CURRENT_WEATHER_SUCCESS,
-        id: locationKey,
-        payload: [weather, weather[0].locationName= locationName, weather[0].locationKey= locationKey]
+        id: Key,
+        payload: [weather, weather[0].locationName= locationName, weather[0].Key= Key]
     }
 }
 
@@ -27,15 +27,15 @@ const fetchcurrentWeatherFailure = error => {
     }
 }
 
-export const fetchcurrentWeather = (locationKey, locationName) => {
+export const fetchcurrentWeather = (Key, locationName) => {
     return (dispatch) => {
         dispatch(fetchcurrentWeatherRequest)
-        const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}`
+        const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/${Key}`
         const query = `?apikey=${apiKey}&language=en-us`
         axios.get(currentLocation + query)
             .then(response => {
                 const weather = response.data
-                dispatch(fetchcurrentWeatherSuccess(weather, locationKey, locationName))
+                dispatch(fetchcurrentWeatherSuccess(weather, Key, locationName))
             })
             .catch(error => {
                 const errorMsg = error.message

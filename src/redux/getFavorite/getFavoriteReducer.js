@@ -13,8 +13,10 @@ const reducer = (state = initialState, action) => {
             }
         case REMOVE_RROM_FAVORITE:
             return {
-                // ...state,
-                favorites: state.favorites.filter((favoriteCity, index) => index !== action.payload)
+                favorites: 
+                   state.favorites.filter(function(city) {
+                        return city.Key !== action.payload
+                      })
             }
         default: return state
 

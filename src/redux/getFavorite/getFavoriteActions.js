@@ -14,10 +14,10 @@ export const addToFavorite = favoriteCity=> (dispatch) => {
 //     }
 // }
 
-export const removeFromFavorite = (index)=> (dispatch) => {
+export const removeFromFavorite = key => (dispatch) => {
     dispatch({
         type: REMOVE_RROM_FAVORITE,
-        payload: index
+        payload: key
     })
 }
 

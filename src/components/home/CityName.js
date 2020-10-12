@@ -18,7 +18,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
         if (isFavorite) {
             dispatch(addToFavorite(city))
         } else {
-            dispatch(removeFromFavorite(index))
+            dispatch(removeFromFavorite(city.Key))
         }
     }, [isFavorite])
 
@@ -47,9 +47,9 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
         setIsFavorite(isFavorite ? false : true)
     }
 
-    const callFetchWeather = (locationKey) => {
-        dispatch(fetchcurrentWeather(locationKey))
-        dispatch(fetchfiveDaysForecasts(locationKey))
+    const callFetchWeather = (Key) => {
+        dispatch(fetchcurrentWeather(Key))
+        dispatch(fetchfiveDaysForecasts(Key))
     }
 
     return (
