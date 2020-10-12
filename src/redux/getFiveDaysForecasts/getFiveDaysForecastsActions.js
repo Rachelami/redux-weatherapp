@@ -26,13 +26,13 @@ const fetchfiveDaysForecastsFailure = error => {
     }
 }
 
-export const fetchfiveDaysForecasts = (Key) => {
+export const fetchfiveDaysForecasts = (Key, presentFahrenheit) => {
     return (dispatch) => {
         dispatch(fetchfiveDaysForecastsRequest)
 
         const forecasts = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${Key}`
-        const query = `?apikey=${apiKey}&q=en-us&metric=true`
-        // const query = `?apikey=${apiKey}&q=en-us&metric=${!presentFahrenheit}`
+        // const query = `?apikey=${apiKey}&q=en-us&metric=true`
+        const query = `?apikey=${apiKey}&q=en-us&metric=${!presentFahrenheit}`
         axios.get(forecasts + query)
             .then(response => {
                 const fiveDaysForecasts = response.data

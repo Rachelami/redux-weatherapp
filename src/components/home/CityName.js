@@ -28,6 +28,10 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
         })
     }, [])
 
+    useEffect(() => {
+        dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
+    }, [presentFahrenheit])
+
     // useEffect(() => {
 
     //     const favoriteArray = favorites.favorites
@@ -64,7 +68,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
 
     const callFetchWeather = (Key) => {
         dispatch(fetchcurrentWeather(Key, city.LocalizedName))
-        dispatch(fetchfiveDaysForecasts(Key))
+        dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
         setExpended(true)
     }
 
@@ -76,7 +80,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
                     // weather.currentWeather &&
                     // weather.currentWeather[0] &&
                     weather.id === city.Key && fiveDaysForecasts && expended &&
-                    < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} />
+                    < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} presentFahrenheit={presentFahrenheit} />
                 }
             </button>
             <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo" onClick={() => favorite()} />

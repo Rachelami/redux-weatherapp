@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fetchCities } from '../../redux/getCity/getCityActions'
 import CityName from './CityName'
 
-function CitiesContainer({ citiesData, fetchCities }) {
+function CitiesContainer({ citiesData, fetchCities, presentFahrenheit }) {
 
     // useEffect(() => {
     //     fetchCities()
@@ -17,7 +17,7 @@ function CitiesContainer({ citiesData, fetchCities }) {
                     <div>{
                         citiesData.cities &&
                         citiesData.cities.map((city) =>
-                            <CityName key={city.Key} city={city}/>
+                            <CityName key={city.Key} city={city}  presentFahrenheit={presentFahrenheit}/>
                         )}
                     </div>
                 </div>

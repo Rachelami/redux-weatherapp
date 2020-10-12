@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import DailyWeather from './DailyWeather'
 
-const Weatherinfo = ({ fiveDaysForecasts, weather }) => {
-    const [presentFahrenheit, setPresentFahrenheit] = useState(false)
+const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
+    // const [presentFahrenheit, setPresentFahrenheit] = useState(false)
 
     const capitalize = (string) => {
         if (typeof string !== 'string') return ''
