@@ -9,16 +9,27 @@ import { connect } from 'react-redux'
 
 const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
     const [isFavorite, setIsFavorite] = useState(false)
+    const [expended, setExpended] = useState(false)
     const dispatch = useDispatch() //added
 
 
+    // useEffect(() => {
+    //     if (isFavorite) {
+    //         dispatch(addToFavorite(city))
+    //     } else {
+    //         dispatch(removeFromFavorite(city.Key))
+    //     }
+    // }, [isFavorite])
+
     useEffect(() => {
-        if (isFavorite) {
-            dispatch(addToFavorite(city))
-        } else {
-            dispatch(removeFromFavorite(city.Key))
-        }
-    }, [isFavorite])
+        console.log(favorites.favorites)
+        favorites.favorites.map(favoriteCity => {
+            console.log(favoriteCity)
+
+            if (favoriteCity.Key === city.Key)
+                setIsFavorite(true)
+        })
+    }, [])
 
     // useEffect(() => {
 
@@ -42,22 +53,32 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
     // }, [isFavorite])
 
     const favorite = () => {
-        setIsFavorite(isFavorite ? false : true)
+        // setIsFavorite(isFavorite ? false : true)
+        if (isFavorite) {
+            dispatch(removeFromFavorite(city.Key))
+            setIsFavorite(false)
+
+        } else {
+            dispatch(addToFavorite(city))
+            setIsFavorite(true)
+
+        }
     }
 
     const callFetchWeather = (Key) => {
-        dispatch(fetchcurrentWeather(Key))
+        dispatch(fetchcurrentWeather(Key, city.LocalizedName))
         dispatch(fetchfiveDaysForecasts(Key))
+        setExpended(true)
     }
 
     return (
         <div className="location-card">
             <button className="city-name" onClick={() => callFetchWeather(city.Key)}>
                 <div>{city.LocalizedName}</div>
-                {weather.currentWeather &&
-                weather.currentWeather[0] &&
-                // weather.currentWeather[0][0] &&
-                weather.currentWeather[0][0][0].Key === city.Key && fiveDaysForecasts && 
+                {
+                    // weather.currentWeather &&
+                    // weather.currentWeather[0] &&
+                    weather.id === city.Key && fiveDaysForecasts && expended &&
                     < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} />
                 }
             </button>

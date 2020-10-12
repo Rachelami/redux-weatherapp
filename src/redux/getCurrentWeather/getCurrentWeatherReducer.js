@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
             return {
                 // ...state,
                 loading: false,
-                // id: action.id,
+                id: action.id,
                 currentWeather: [...state.currentWeather, action.payload],
                 // currentWeather: [...state.currentWeather, action.payload, action.payload[0].id = action.id],
                 error: ''

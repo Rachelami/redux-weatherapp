@@ -5,14 +5,14 @@ import { useHistory } from "react-router-dom";
 const TopNavbar = () => {
     const [isFavoritePageActive, setIsFavoritePageActive] = useState(false)
 
-    // useEffect(() => {
-    //     if (window.location.href.includes("favorite")) {
-    //         setIsFavoritePageActive(true)
-    //     }
-    //     else {
-    //         setIsFavoritePageActive(false)
-    //     }
-    // })
+    useEffect(() => {
+        if (window.location.href.includes("favorite")) {
+            setIsFavoritePageActive(true)
+        }
+        else {
+            setIsFavoritePageActive(false)
+        }
+    })
 
     const history = useHistory()
 

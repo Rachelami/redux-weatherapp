@@ -4,22 +4,29 @@ import { CityContext } from '../CityContext'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
-import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
+import { removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 
 const FavoriteCard = ({ cityWeatherInfo, weather, favoriteCity, favorites, locationName }) => {
     const [isFavorite, setIsFavorite] = useState(true)
     const [currentWeatherIsFetched, setcurrentWeatherIsFetched] = useState(false)
-    const [aaaa, setaaaa] = useState(false)
+    const [showCard, setShowCard] = useState(false)
 
     const dispatch = useDispatch()
 
     const favorite = () => {
-        setIsFavorite(isFavorite ? false : true)
+        // setIsFavorite(false)
+        dispatch(removeFromFavorite(cityWeatherInfo.Key))
+        setShowCard(false)
     }
 
-    // useEffect(() => {
-    //     console.log(weather)
-    // })
+    useEffect(() => {
+        favorites.favorites.map(favoriteCity => {
+            if (favoriteCity.Key === cityWeatherInfo.Key) {
+                setShowCard(true)
+            }
+        })
+
+    }, [])
 
     // useEffect(() => {
     //     dispatch(fetchcurrentWeather(cityWeatherInfo.Key, cityWeatherInfo.LocalizedName))
@@ -28,13 +35,11 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favoriteCity, favorites, locat
     //     // console.log("weather!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     // }, [])
 
-    useEffect(() => {
-        if (isFavorite) {
-            dispatch(addToFavorite(cityWeatherInfo))
-        } else {
-            dispatch(removeFromFavorite(cityWeatherInfo.Key))
-        }
-    }, [isFavorite])
+    // useEffect(() => {
+    //     if (!isFavorite) {
+    //         dispatch(removeFromFavorite(cityWeatherInfo.Key))
+    //     }
+    // }, [isFavorite])
 
     // useEffect(() => {
     //     if (!isFavorite) {
@@ -58,7 +63,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favoriteCity, favorites, locat
 
     return (
         <>
-            {isFavorite &&
+            {showCard &&
                 <Card>
                     <img src={process.env.PUBLIC_URL + '/images/yellow-star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
                     <Card.Body>
@@ -86,7 +91,6 @@ const mapDispatchToProps = dispatch => {
         fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         // handleFavorites: () => dispatch(handleFavorites()),
         removeFromFavorite: () => dispatch(removeFromFavorite()),
-        addToFavorite: () => dispatch(addToFavorite())
     }
 }
 
