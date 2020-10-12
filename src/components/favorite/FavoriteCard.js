@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 
-const FavoriteCard = ({ cityWeatherInfo, index, weatherData, favoriteCity, favorites, locationName }) => {
+const FavoriteCard = ({ cityWeatherInfo, weather, favoriteCity, favorites, locationName }) => {
     const [isFavorite, setIsFavorite] = useState(true)
     const [currentWeatherIsFetched, setcurrentWeatherIsFetched] = useState(false)
     const [aaaa, setaaaa] = useState(false)
@@ -18,14 +18,14 @@ const FavoriteCard = ({ cityWeatherInfo, index, weatherData, favoriteCity, favor
     }
 
     // useEffect(() => {
-    //     console.log(weatherData)
+    //     console.log(weather)
     // })
 
     // useEffect(() => {
     //     dispatch(fetchcurrentWeather(cityWeatherInfo.Key, cityWeatherInfo.LocalizedName))
     //     // console.log("cityWeatherInfo.Key!!!!!!!!!!!!!!!!!!!!!!!!!")
-    //     // console.log(weatherData)
-    //     // console.log("weatherData!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    //     // console.log(weather)
+    //     // console.log("weather!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     // }, [])
 
     useEffect(() => {
@@ -76,7 +76,7 @@ const FavoriteCard = ({ cityWeatherInfo, index, weatherData, favoriteCity, favor
 
 const mapStateToProps = state => {
     return {
-        weatherData: state.weather,
+        weather: state.weather,
         favorites: state.favorites
     }
 }

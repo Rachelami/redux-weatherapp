@@ -7,12 +7,10 @@ import Weatherinfo from './WeatherInfo'
 import { connect } from 'react-redux'
 
 
-const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weatherData, index }) => {
+const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const dispatch = useDispatch() //added
 
-    // console.log("weatherData.id!!!!!!!!!!!!!!!!!!!!!!!")
-    // console.log(weatherData.id)
 
     useEffect(() => {
         if (isFavorite) {
@@ -56,8 +54,11 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
         <div className="location-card">
             <button className="city-name" onClick={() => callFetchWeather(city.Key)}>
                 <div>{city.LocalizedName}</div>
-                {weatherData.id === city.Key && fiveDaysForecasts && weatherData &&
-                    <Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weatherData={weatherData} />
+                {weather.currentWeather &&
+                weather.currentWeather[0] &&
+                // weather.currentWeather[0][0] &&
+                weather.currentWeather[0][0][0].Key === city.Key && fiveDaysForecasts && 
+                    < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} />
                 }
             </button>
             <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo" onClick={() => favorite()} />
@@ -69,7 +70,7 @@ const CityName = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weath
 
 const mapStateToProps = state => {
     return {
-        weatherData: state.weather,
+        weather: state.weather,
         fiveDaysForecasts: state.fiveDaysForecasts,
         favorites: state.favorites
     }

@@ -10,14 +10,14 @@ function CitiesContainer({ citiesData, fetchCities }) {
     }, [])
 
     return (
-        citiesData.loading ? <h2>Loading...</h2> :
+        // citiesData.loading ? <h2>Loading...</h2> :
             citiesData.error ? <h2>{citiesData.error}</h2> :
                 <div>
                     <h2>Cities List</h2>
                     <div>{
                         citiesData.cities &&
-                        citiesData.cities.map((city, index) =>
-                            <CityName key={city.Key} city={city} index={index}/>
+                        citiesData.cities.map((city) =>
+                            <CityName key={city.Key} city={city}/>
                         )}
                     </div>
                 </div>
