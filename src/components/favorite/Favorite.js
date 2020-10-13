@@ -13,7 +13,7 @@ const Favorite = ({ favorites, weather, presentFahrenheit }) => {
         if (weather.error) {
             setErrorMessage(weather.error)
         }
-    })
+    },[weather])
 
     useEffect(() => {
         if (favorites.favorites) {

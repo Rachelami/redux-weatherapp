@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Form } from 'react-bootstrap'
 import { useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
 
-const TopNavbar = () => {
+const TopNavbar = (favoriteCity) => {
     const [isFavoritePageActive, setIsFavoritePageActive] = useState(false)
 
     useEffect(() => {
@@ -12,7 +13,7 @@ const TopNavbar = () => {
         else {
             setIsFavoritePageActive(false)
         }
-    })
+    },[favoriteCity])
 
     const history = useHistory()
 
@@ -47,4 +48,12 @@ const TopNavbar = () => {
     )
 }
 
-export default TopNavbar
+const mapStateToProps = state => {
+    return {
+        favoriteCity: state.favoriteCity
+    }
+}
+
+export default connect(
+    mapStateToProps,
+)(TopNavbar)

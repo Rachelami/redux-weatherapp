@@ -13,20 +13,20 @@ const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecast
     const dispatch = useDispatch()
     const cityCard = favoriteCity.favoriteCity
 
-    const favorite = () => {
-        setIsFavorite(isFavorite ? false : true)
-        dispatch(removeFromFavorite(cityCard.Key))
-    }
-
     useEffect(() => {
         if (fiveDaysForecasts.error) {
             setErrorMessage(fiveDaysForecasts.error)
         }
     }, [fiveDaysForecasts])
-
+    
     useEffect(() => {
         dispatch(fetchfiveDaysForecasts(cityCard.Key, presentFahrenheit))
     }, [presentFahrenheit])
+    
+    const favorite = () => {
+        setIsFavorite(false)
+        dispatch(removeFromFavorite(cityCard.Key))
+    }
 
     const capitalize = (string) => {
         if (typeof string !== 'string') return ''
