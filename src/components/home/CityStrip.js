@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
 import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
-import Weatherinfo from './WeatherInfo'
 import { connect } from 'react-redux'
+import Weatherinfo from './WeatherInfo'
 import Toast from '../Toast'
 
 
@@ -15,15 +15,6 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (weather.error) {
-            setErrorMessage(weather.error)
-        }
-        if (fiveDaysForecasts.error) {
-            setErrorMessage(fiveDaysForecasts.error)
-        }
-    })
-
-    useEffect(() => {
         favorites.favorites.map(favoriteCity => {
             if (favoriteCity.Key === city.Key)
                 setIsFavorite(true)
@@ -31,11 +22,19 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     }, [])
 
     useEffect(() => {
+        if (weather.error) {
+            setErrorMessage(weather.error)
+        }
+        if (fiveDaysForecasts.error) {
+            setErrorMessage(fiveDaysForecasts.error)
+        }
+    }, [weather, fiveDaysForecasts])
+
+    useEffect(() => {
         if (expended) {
             dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
         }
     }, [presentFahrenheit])
-
 
     const favorite = () => {
         if (isFavorite) {

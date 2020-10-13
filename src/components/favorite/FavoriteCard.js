@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
+import { setFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import Toast from '../Toast'
 
 const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }) => {
@@ -35,6 +37,10 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
         return string.charAt(0).toUpperCase() + string.slice(1)
     }
 
+    const goToMainPage = () => {
+        dispatch(setFavoriteCity(cityWeatherInfo))
+    }
+
     return (
         <>
             {showCard &&
@@ -46,7 +52,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
                         {presentFahrenheit? 
                         <Card.Text>{Math.round(cityWeatherInfo.Temperature.Imperial.Value)}&deg;F</Card.Text>:
                         <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}
-                        {/* <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link> */}
+                        <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link>
                     </Card.Body>
                 </Card >
             }
@@ -67,6 +73,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         removeFromFavorite: () => dispatch(removeFromFavorite()),
+        setFavoriteCity: () => dispatch(setFavoriteCity()),
     }
 }
 

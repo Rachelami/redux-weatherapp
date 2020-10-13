@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { FormControl } from 'react-bootstrap'
-import Toast from '../Toast'
 import { fetchCities } from '../../redux/getCity/getCityActions'
+import { resetFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import { useDispatch } from 'react-redux'
+import Toast from '../Toast'
 
 const Search = () => {
     const [input, setInput] = useState('')
@@ -17,6 +18,7 @@ const Search = () => {
     const handleChange = (event) => {
         if (verifyInput(event.target.value)) {
             setInput(event.target.value)
+            dispatch(resetFavoriteCity())
         } else {
             setErrorMessage('Invalid Character')
         }
