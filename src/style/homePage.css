@@ -1,12 +1,6 @@
 
 /* HomePage */
 
-.switch-to-fahrenheit-continer {
-    display: flex;
-    justify-content: center;
-    padding-top: 8px;
-}
-
 .location-card {
     margin: 20px;
     display: flex;
@@ -81,7 +75,7 @@
 .search-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 0px 10px;
     position: relative;
 }

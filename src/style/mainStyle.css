@@ -34,6 +34,27 @@
     border-radius: 20px !important; 
 }
 
+/* toggle */
+.switch-to-fahrenheit-continer {
+    position:absolute;
+    left: 48%
+}
+
+.celsius {
+    position:absolute;
+    left: 40%;
+}
+
+.fahrenheit {
+    position:absolute;
+    right: 40%
+}
+
+.toggle {
+    padding-bottom: 27px;
+    padding-top: 20px;
+}
+
 /* @media */
 
 @media (max-width: 970px) {
@@ -89,10 +110,14 @@
         align-items: center
     }
     .temp-logos {
-        height: 109px !important;
+        height: 80px !important;
         position: absolute;
         left: -6px;
         top: -9px;
+    }
+    .location-card {
+        margin: 0px !important;
+        margin-top: 20px !important;
     }
 }
 

@@ -18,7 +18,7 @@ const TopNavbar = () => {
 
     const openPage = (path) => {
         history.push(path)
-        if (window.location.href.includes("favorite")) {
+        if (path === "/favorite") {
             setIsFavoritePageActive(true)
         }
         else {
