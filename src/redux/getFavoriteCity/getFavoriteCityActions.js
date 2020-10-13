@@ -1,4 +1,3 @@
-
 import {
     SET_FAVORITE_CITY,
     RESET_FAVORITE_CITY

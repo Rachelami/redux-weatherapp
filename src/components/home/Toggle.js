@@ -15,7 +15,7 @@ const Toggle = (props) => {
     return (
         <div className="toggle">
             <div  className="celsius">{presentFahrenheit && 'Celsius'}</div>
-            <Form className="switch-to-fahrenheit-continer">
+            <Form>
                 <Form.Check
                     type="switch"
                     id="custom-switch"
