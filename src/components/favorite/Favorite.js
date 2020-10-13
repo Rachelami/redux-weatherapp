@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import FavoriteCard from './FavoriteCard'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
+import FavoriteCard from './FavoriteCard'
 import Toast from '../Toast'
 
 const Favorite = ({ favorites, weather, presentFahrenheit }) => {

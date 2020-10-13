@@ -25,7 +25,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
         if (weather.error) {
             setErrorMessage(weather.error)
         }
-    })
+    },[weather])
 
     const favorite = () => {
         dispatch(removeFromFavorite(cityWeatherInfo.Key))
