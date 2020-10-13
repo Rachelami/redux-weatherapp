@@ -47,9 +47,11 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     }
 
     const callFetchWeather = (Key) => {
-        dispatch(fetchcurrentWeather(Key, city.LocalizedName))
-        dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
-        setExpended(true)
+        if (!expended) {
+            dispatch(fetchcurrentWeather(Key, city.LocalizedName))
+            dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
+            setExpended(true)
+        }
     }
 
     return (
