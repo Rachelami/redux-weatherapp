@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
+import {Star, WeatherIcon} from '../../styled/shared'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -45,10 +46,10 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
         <>
             {showCard &&
                 <Card>
-                    <img src={process.env.PUBLIC_URL + '/images/yellow-star.png'} className="favorite-logo-in-card" onClick={() => favorite()} />
+                    <Star favoriteCard src={process.env.PUBLIC_URL + '/images/yellow-star.png'} onClick={() => favorite()} />
                     <Card.Body>
                         <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
-                        <Card.Img variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} className="favorite-temp-logos" />
+                        <WeatherIcon variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} />
                         {presentFahrenheit? 
                         <Card.Text>{Math.round(cityWeatherInfo.Temperature.Imperial.Value)}&deg;F</Card.Text>:
                         <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}

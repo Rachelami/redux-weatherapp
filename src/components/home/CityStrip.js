@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import {Wrapper, Strip} from '../../styled/cityStrip'
+import {Star} from '../../styled/shared'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
@@ -55,15 +57,15 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     }
 
     return (
-        <div className="location-card">
-            <button className="city-name" onClick={() => callFetchWeather(city.Key)}>
+        <Wrapper>
+            <Strip onClick={() => callFetchWeather(city.Key)}>
                 <div>{city.LocalizedName}</div>
                 {weather.id === city.Key && fiveDaysForecasts && expended &&
                     < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} presentFahrenheit={presentFahrenheit} />}
-            </button>
-            <img src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="favorite-logo" onClick={() => favorite()} />
+            </Strip>
+            <Star cityStrip src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} onClick={() => favorite()} />
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
-        </div>
+        </Wrapper>
     )
 }
 

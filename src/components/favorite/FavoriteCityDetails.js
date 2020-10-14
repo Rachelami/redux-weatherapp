@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Card, Header, DayNight, MiddleWrapper } from '../../styled/favoriteCityDetails'
+import {FiveDaysContainer, Star, WeatherIcon} from '../../styled/shared'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
@@ -18,11 +20,11 @@ const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecast
             setErrorMessage(fiveDaysForecasts.error)
         }
     }, [fiveDaysForecasts])
-    
+
     useEffect(() => {
         dispatch(fetchfiveDaysForecasts(cityCard.Key, presentFahrenheit))
     }, [presentFahrenheit])
-    
+
     const favorite = () => {
         setIsFavorite(false)
         dispatch(removeFromFavorite(cityCard.Key))
@@ -36,30 +38,30 @@ const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecast
     return (
         <>
             {isFavorite &&
-                <div className="favorite-city-details-card">
-                    <div className="favorite-city-details-image-continer">
-                        <img src={cityCard.IsDayTime ? process.env.PUBLIC_URL + '/images/day.gif' : process.env.PUBLIC_URL + '/images/night.gif'} className="day-night" />
-                        <img src={process.env.PUBLIC_URL + '/images/yellow-star.png'} className="star" onClick={() => favorite()} />
-                    </div>
-                    <div className="favorite-city-details-header">
+                <Card>
+                    <Header>
+                        <DayNight src={cityCard.IsDayTime ? process.env.PUBLIC_URL + '/images/day.gif' : process.env.PUBLIC_URL + '/images/night.gif'} />
+                        <Star favoriteCityDetails src={process.env.PUBLIC_URL + '/images/yellow-star.png'} onClick={() => favorite()} />
+                    </Header>
+                    <MiddleWrapper>
                         <h2>{capitalize(cityCard.locationName)}</h2>
-                        <img src={process.env.PUBLIC_URL + `/images/weather-icons/${cityCard.WeatherIcon}.svg`} className="temp-favorite-logo" />
-                    </div>
+                        <WeatherIcon src={process.env.PUBLIC_URL + `/images/weather-icons/${cityCard.WeatherIcon}.svg`} />
+                    </MiddleWrapper>
 
                     {presentFahrenheit ?
                         <h4>{Math.round(cityCard.Temperature.Imperial.Value)}&deg;F</h4> :
                         <h4>{Math.round(cityCard.Temperature.Metric.Value)}&deg;C</h4>
                     }
 
-                    < div className="five-days-container" >
+                    <FiveDaysContainer>
                         {fiveDaysForecasts &&
                             fiveDaysForecasts.fiveDaysForecasts.DailyForecasts &&
                             fiveDaysForecasts.fiveDaysForecasts.DailyForecasts.map((dailyForecast) => (
                                 <DailyWeather key={dailyForecast.Date} dailyForecast={dailyForecast} presentFahrenheit={presentFahrenheit} />
                             ))
                         }
-                    </div>
-                </div>
+                    </FiveDaysContainer>
+                </Card>
             }
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
         </>

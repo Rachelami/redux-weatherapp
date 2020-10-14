@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {Wrapper} from '../../styled/favorite'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
@@ -36,13 +37,12 @@ const Favorite = ({ favorites, weather, presentFahrenheit }) => {
     }, [])
 
     return (
-        <div className="favorite-container">
+        <Wrapper>
             {weather.currentWeather.length > 0 && weather.currentWeather.map((favoriteCity) =>
                 <FavoriteCard key={favoriteCity[0][0].Key} cityWeatherInfo={favoriteCity[0][0]} presentFahrenheit={presentFahrenheit}/>
             )}
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
-
-        </div>
+        </Wrapper>
     )
 }
 

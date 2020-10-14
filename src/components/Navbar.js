@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Form } from 'react-bootstrap'
-import { useHistory } from "react-router-dom";
+import {NavLogos, HeroloLogo} from '../styled/navbar'
+import { useHistory } from "react-router-dom"
 import { connect } from 'react-redux'
 
 const TopNavbar = (favoriteCity) => {
@@ -31,18 +32,18 @@ const TopNavbar = (favoriteCity) => {
         <Navbar bg="light" variant="light">
             <Nav className="mr-auto">
                 <Nav.Link onClick={() => openPage("/")} className={isFavoritePageActive ? null : "active"}>
-                    <img src={isFavoritePageActive ? process.env.PUBLIC_URL + '/images/house.png' : process.env.PUBLIC_URL + '/images/red-house.png'} className="nav-logos" />
+                    <NavLogos src={isFavoritePageActive ? process.env.PUBLIC_URL + '/images/house.png' : process.env.PUBLIC_URL + '/images/red-house.png'} />
                     Home
                 </Nav.Link>
 
                 <Nav.Link onClick={() => openPage("/favorite")} className={isFavoritePageActive ? "active" : null}>
-                    <img src={isFavoritePageActive ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} className="nav-logos" />
+                    <NavLogos src={isFavoritePageActive ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} />
                 Favorite
                 </Nav.Link>
             </Nav>
 
             <Form inline>
-                <img className="herolo-logo" src={process.env.PUBLIC_URL + "/images/herolo.png"} />
+                <HeroloLogo src={process.env.PUBLIC_URL + "/images/herolo.png"} />
             </Form>
         </Navbar>
     )

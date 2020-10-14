@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FormControl } from 'react-bootstrap'
+import {Wrapper, MagnifyingGlass, Input} from '../../styled/search'
 import { fetchCities } from '../../redux/getCity/getCityActions'
 import { resetFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import { useDispatch } from 'react-redux'
@@ -36,10 +37,10 @@ const Search = () => {
 
     return (
         <>
-            <div className="search-container">
-                <FormControl type="text" placeholder="Search" value={input} className="search-field" onChange={handleChange} />
-                <img src={process.env.PUBLIC_URL + '/images/magnifying-glass.png'} className="magnifying-glass" />
-            </div>
+            <Wrapper>
+                <Input type="text" placeholder="Search" value={input} onChange={handleChange} />
+                <MagnifyingGlass src={process.env.PUBLIC_URL + '/images/magnifying-glass.png'} />
+            </Wrapper>
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
         </>
     )

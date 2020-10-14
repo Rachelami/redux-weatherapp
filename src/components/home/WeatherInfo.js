@@ -1,4 +1,6 @@
 import React from 'react'
+import { Wrapper, WeatherWrapper, WeatherIcon } from '../../styled/weatherInfo'
+import { Flex, FiveDaysContainer } from '../../styled/shared'
 import DailyWeather from './DailyWeather'
 
 const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
@@ -9,29 +11,29 @@ const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
     }
 
     return (
-        <div className="weather-strip-container">
-            <div className="weather-strip">
-                <div className="weather-info-container">
-                    <div className="flex">
-                        <img src={process.env.PUBLIC_URL + `/images/weather-icons/${weather.WeatherIcon}.svg`} className="temp-logos" />
-                        <div>{capitalize(weather.WeatherText)}</div>
-                    </div>
-                    {presentFahrenheit ?
-                        <div>{Math.round(weather.Temperature.Imperial.Value)}&deg;F</div> :
-                        <div>{Math.round(weather.Temperature.Metric.Value)}&deg;C</div>
-                    }
-                </div>
+        // <Wrappery>
+        <Wrapper>
+            <WeatherWrapper>
+                <Flex>
+                    <WeatherIcon src={process.env.PUBLIC_URL + `/images/weather-icons/${weather.WeatherIcon}.svg`} />
+                    <div>{capitalize(weather.WeatherText)}</div>
+                </Flex>
+                {presentFahrenheit ?
+                    <div>{Math.round(weather.Temperature.Imperial.Value)}&deg;F</div> :
+                    <div>{Math.round(weather.Temperature.Metric.Value)}&deg;C</div>
+                }
+            </WeatherWrapper>
 
-                < div className="five-days-container" >
-                    {fiveDaysForecasts &&
-                        fiveDaysForecasts.fiveDaysForecasts.DailyForecasts &&
-                        fiveDaysForecasts.fiveDaysForecasts.DailyForecasts.map((dailyForecast) => (
-                            <DailyWeather key={dailyForecast.Date} dailyForecast={dailyForecast} presentFahrenheit={presentFahrenheit} />
-                        ))
-                    }
-                </div>
-            </div>
-        </div>
+            <FiveDaysContainer>
+                {fiveDaysForecasts &&
+                    fiveDaysForecasts.fiveDaysForecasts.DailyForecasts &&
+                    fiveDaysForecasts.fiveDaysForecasts.DailyForecasts.map((dailyForecast) => (
+                        <DailyWeather key={dailyForecast.Date} dailyForecast={dailyForecast} presentFahrenheit={presentFahrenheit} />
+                    ))
+                }
+            </FiveDaysContainer>
+        </Wrapper>
+        // </Wrappery>
     )
 }
 
