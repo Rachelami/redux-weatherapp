@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
-// export const Wrappery = styled.div`
-//     position: relative;
-// `
 export const Wrapper = styled.div`
     width: 70vw;
     border: 1px solid black;
-    border-radius: 20px;
+    border-radius: ${props => props.theme.cardRadius};
     padding: 5px 10px;
     margin: 5px;
     background-color: floralwhite;

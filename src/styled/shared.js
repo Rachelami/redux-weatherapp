@@ -7,11 +7,8 @@ export const FiveDaysContainer = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    @media (max-width: 970px) { // why twice??
+    @media (max-width: 970px) {
         flex-direction: column
-    }
-    @media (max-width: 670px) { // why twice??
-        flex-direction: column;
     }
 `
 export const Star = styled.img`

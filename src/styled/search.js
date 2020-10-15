@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     position: relative;
 `
 export const Input = styled(FormControl)`
-    border-radius: 20px !important;
+    border-radius: ${props => props.theme.cardRadius} !important;
     @media (min-width: 670px) {
         width: 50vw !important;
     }

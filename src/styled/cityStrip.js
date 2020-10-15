@@ -11,17 +11,13 @@ export const Wrapper = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
     }
-    /* @media (max-width:500px) {
-        margin: 0px !important;
-        margin-top: 20px !important;
-    } */
     @media (max-width:650px) {
         flex-wrap: wrap;
     }
 `
 export const Strip = styled.button`
     width: 72vw;
-    border-radius: 20px;
+    border-radius: ${props => props.theme.cardRadius};
     background-color: transparent;
     display: flex;
     flex-direction: column;

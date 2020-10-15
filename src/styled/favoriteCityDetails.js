@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Card = styled.div`
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius: ${props => props.theme.cardRadius};
     border: 1px solid black;
     padding: 10px;
     margin: 10px 10%;
@@ -23,7 +23,7 @@ export const Header = styled.div`
 export const DayNight = styled.img`
     width: 100px;
     height: auto;
-    border-radius: 20px;
+    border-radius: ${props => props.theme.cardRadius};
     border: 3px solid black;
     @media (max-width: 670px) {
         display: none;

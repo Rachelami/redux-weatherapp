@@ -1,2 +1,2 @@
-export const blue = "blue"
-export const green = "green"
+
+export const cardRadius = "20px"

@@ -7,17 +7,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './redux/store'
-// import { ThemeProvider } from 'styled-components'
-// import * as theme from './styled/theme'
+import { ThemeProvider } from 'styled-components'
+import * as theme from './styled/theme'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <ThemeProvider theme={theme}> */}
+      <ThemeProvider theme={theme}>
         <Router>
           <App />
         </Router>
-      {/* </ThemeProvider> */}
+      </ThemeProvider>
     </ Provider>
   </React.StrictMode>,
   document.getElementById('root')
