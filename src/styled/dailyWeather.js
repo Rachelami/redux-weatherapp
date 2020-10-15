@@ -19,7 +19,7 @@ export const OneDay = styled.div`
         padding: 0px 5px;
         justify-content: space-between;
         background-color: moccasin;
-        /* padding: 2px; */
+        margin-bottom: 2px;
     }
 `
 export const WeatherIcon = styled.img`

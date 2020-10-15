@@ -1,14 +1,6 @@
-.App {
-    background-image: url('https://i.pinimg.com/originals/8b/7f/bc/8b7fbc2e623720393ad7ffa7e4896eac.gif');
-    min-height: 100vh;
-    text-align: center;
-    padding-bottom: 10px;
-}
 
-/* bootstrap class */
-
-.input-button {
-    border-radius: 0px 20px 20px 0px !important;
+.Toastify__toast {
+    border-radius: 20px !important; 
 }
 
 .card {
@@ -17,19 +9,9 @@
     border-radius: 20px !important;
     box-shadow: 4px 4px 5px #aaaaaa;
 }
-
-.Toastify__toast {
-    border-radius: 20px !important; 
-}
-
+ 
 @media (max-width: 500px) {
     .card {
         width: 100% !important;
     }
-}
-
-
-/* איפה זה היה?? */
-.space { 
-    justify-content: space-between;
 }

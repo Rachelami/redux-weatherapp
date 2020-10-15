@@ -6,6 +6,7 @@ import TopNavbar from './components/Navbar.js'
 import Favorite from './components/favorite/Favorite'
 import Search from './components/home/Search'
 import CitiesContainer from './components/home/CitiesContainer'
+import {AppWrap} from './styled/app'
 
 function App() {
   const [presentFahrenheit, setPresentFahrenheit] = useState(false)
@@ -16,7 +17,7 @@ function App() {
 
   return (
 
-    <div className="App">
+    <AppWrap>
       <TopNavbar />
       <Toggle changeToggle={checkToggle} />
 
@@ -30,7 +31,7 @@ function App() {
           <Favorite presentFahrenheit={presentFahrenheit}/>
         </Route>
       </Switch>
-    </div>
+    </AppWrap>
   );
 }
 
