@@ -32,6 +32,6 @@ export const WeatherIcon = styled.img`
     height: 80px !important;
     position: absolute;
     left: -6px;
-    top: -9px;
+    top: 25px;
     }
 `
