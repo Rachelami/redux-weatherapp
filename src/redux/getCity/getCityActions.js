@@ -6,20 +6,21 @@ import {
     FETCH_CITIES_FAILURE
 } from './getCityTypes'
 
-export const fetchCitiesRequest = () => {
+export const fetchCitiesRequest = userInput => {
     return {
-        type: FETCH_CITIES_REQUEST
+        type: FETCH_CITIES_REQUEST,
+        payload: userInput
     }
 }
 
-const fetchCitiesSuccess = cities => {
+export const fetchCitiesSuccess = cities => {
     return {
         type: FETCH_CITIES_SUCCESS,
         payload: cities
     }
 }
 
-const fetchCitiesFailure = error => {
+export const fetchCitiesFailure = error => {
     return {
         type: FETCH_CITIES_FAILURE,
         payload: error
