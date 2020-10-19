@@ -1,4 +1,5 @@
-import { takeEvery, put, take, call, select } from 'redux-saga/effects'
+import { takeEvery, put, call } from 'redux-saga/effects'
+import { fetchCities, fetchcurrentWeather, fetchfiveDaysForecasts } from './api/fetchApi'
 
 import { FETCH_CITIES_REQUEST } from './getCity/getCityTypes'
 import { FETCH_CURRENT_WEATHER_REQUEST } from './getCurrentWeather/getCurrentWeatherTypes'
@@ -6,45 +7,44 @@ import { FETCH_FIVE_DAYS_FORECASTS_REQUEST } from './getFiveDaysForecasts/getFiv
 import { ADD_FAVORITE, DELETE_FAVORITE } from './getFavorite/getFavoriteTypes'
 import { SET_FAVORITE_CITY, RESET_FAVORITE_CITY } from './getFavoriteCity/getFavoriteCityTypes'
 
-import { fetchCities, fetchcurrentWeather, fetchfiveDaysForecasts } from './api/fetchApi'
-
 import { fetchCitiesSuccess, fetchCitiesFailure } from './getCity/getCityActions'
 import { fetchcurrentWeatherSuccess, fetchcurrentWeatherFailure } from './getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecastsSuccess, fetchfiveDaysForecastsFailure } from './getFiveDaysForecasts/getFiveDaysForecastsActions'
 import { addToFavorite, removeFromFavorite } from './getFavorite/getFavoriteActions'
 import { setFavoriteSagaCity, resetFavoriteSagaCity } from './getFavoriteCity/getFavoriteCityActions'
 
+
 function* handleGetCitiesRequest(action) {
-    try {
-        const citiesAutoComplete = yield call(fetchCities, action.payload)
+    const citiesAutoComplete = yield call(fetchCities, action.payload)
+    if (typeof (citiesAutoComplete) === "object") {
         yield put(fetchCitiesSuccess(citiesAutoComplete))
-    } catch (err) {
-        console.log('err!!!!!!!!!!!!!!!!!!')
-        console.error(err)
-        yield put(fetchCitiesFailure(err.message))
+    } else {
+        yield put(fetchCitiesFailure(citiesAutoComplete))
     }
 }
 
 function* handleGetCurrentWeatherRequest(action) {
-    try {
-        const cityCurrentWeather = yield call(fetchcurrentWeather, action.key)
+    const cityCurrentWeather = yield call(fetchcurrentWeather, action.key)
+    if (typeof (cityCurrentWeather) === "object") {
         yield put(fetchcurrentWeatherSuccess(cityCurrentWeather, action.key, action.locationName))
-    } catch (err) {
-        yield put(fetchcurrentWeatherFailure(err.message))
+    } else {
+        yield put(fetchcurrentWeatherFailure(cityCurrentWeather))
     }
 }
 
 function* handleGetFiveDayForcastRequest(action) {
-    try {
-        const fiveDaysForecasts = yield call(fetchfiveDaysForecasts, action.key, action.presentFahrenheit)
+    const fiveDaysForecasts = yield call(fetchfiveDaysForecasts, action.key, action.presentFahrenheit)
+    if (typeof (fiveDaysForecasts) === "object") {
         yield put(fetchfiveDaysForecastsSuccess(fiveDaysForecasts))
-    } catch (err) {
-        yield put(fetchfiveDaysForecastsFailure(err.message))
+    } else {
+        yield put(fetchfiveDaysForecastsFailure(fiveDaysForecasts))
     }
 }
+
 function* handleAddToFavorite(action) {
     yield put(addToFavorite(action.payload))
 }
+
 function* handleRemoveFromFavorite(action) {
     yield put(removeFromFavorite(action.payload))
 }
@@ -52,6 +52,7 @@ function* handleRemoveFromFavorite(action) {
 function* handleSetFavoriteCity(action) {
     yield put(setFavoriteSagaCity(action.payload))
 }
+
 function* handleResetFavoriteCity() {
     yield put(resetFavoriteSagaCity())
 }

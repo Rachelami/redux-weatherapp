@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { FormControl } from 'react-bootstrap'
-import {Wrapper, MagnifyingGlass, Input} from '../../styled/search'
-import { fetchCities, fetchCitiesRequest } from '../../redux/getCity/getCityActions'
+import { Wrapper, MagnifyingGlass, Input } from '../../styled/search'
+import { fetchCitiesRequest } from '../../redux/getCity/getCityActions'
 import { resetFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import { useDispatch } from 'react-redux'
 import Toast from '../Toast'
@@ -14,7 +13,6 @@ const Search = () => {
 
     useEffect(() => {
         if (input !== '')
-            // DONE - dispatch(fetchCities(input))
             dispatch(fetchCitiesRequest(input))
     }, [input])
 

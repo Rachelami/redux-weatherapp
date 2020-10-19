@@ -1,11 +1,9 @@
-import { ADD_TO_FAVORITE, REMOVE_RROM_FAVORITE, ADD_FAVORITE, DELETE_FAVORITE } from './getFavoriteTypes'
-
-// export const addToFavorite = favoriteCity=> (dispatch) => {
-//     dispatch({
-//         type: ADD_TO_FAVORITE,
-//         payload: favoriteCity
-//     })
-// }
+import {
+    ADD_TO_FAVORITE,
+    REMOVE_RROM_FAVORITE,
+    ADD_FAVORITE,
+    DELETE_FAVORITE
+} from './getFavoriteTypes'
 
 export const addFavorite = favoriteCity => {
     return {
@@ -26,13 +24,6 @@ export const addToFavorite = favoriteCity => {
         payload: favoriteCity
     }
 }
-
-// export const removeFromFavorite = key => (dispatch) => {
-//     dispatch({
-//         type: REMOVE_RROM_FAVORITE,
-//         payload: key
-//     })
-// }
 
 export const removeFromFavorite = key => {
     return {

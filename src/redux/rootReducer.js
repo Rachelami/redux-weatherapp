@@ -5,7 +5,7 @@ import fiveDaysForecastsReducer from './getFiveDaysForecasts/getFiveDaysForecast
 import getFavoriteReducer from './getFavorite/getFavoriteReducer'
 import getFavoriteCityReducer from './getFavoriteCity/getFavoriteCityReducer'
 
-const rootReducer = combineReducers({ 
+const rootReducer = combineReducers({
     cities: citiesReduser,
     weather: currentWeatherReducer,
     fiveDaysForecasts: fiveDaysForecastsReducer,

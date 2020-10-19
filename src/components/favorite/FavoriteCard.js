@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
-import {Star, WeatherIcon} from '../../styled/shared'
+import { Star, WeatherIcon } from '../../styled/shared'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
-import { removeFromFavorite, deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
+import { deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import { setFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import Toast from '../Toast'
 
@@ -26,11 +25,10 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
         if (weather.error) {
             setErrorMessage(weather.error)
         }
-    },[weather])
+    }, [weather])
 
     const favorite = () => {
         dispatch(deleteFavorite(cityWeatherInfo.Key))
-        //DONE dispatch(removeFromFavorite(cityWeatherInfo.Key))
         setShowCard(false)
     }
 
@@ -51,9 +49,9 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
                     <Card.Body>
                         <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
                         <WeatherIcon variant="top" src={process.env.PUBLIC_URL + `/images/weather-icons/${cityWeatherInfo.WeatherIcon}.svg`} />
-                        {presentFahrenheit? 
-                        <Card.Text>{Math.round(cityWeatherInfo.Temperature.Imperial.Value)}&deg;F</Card.Text>:
-                        <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}
+                        {presentFahrenheit ?
+                            <Card.Text>{Math.round(cityWeatherInfo.Temperature.Imperial.Value)}&deg;F</Card.Text> :
+                            <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}
                         <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link>
                     </Card.Body>
                 </Card >
@@ -73,9 +71,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         deleteFavorite: () => dispatch(deleteFavorite()),
-        // removeFromFavorite: () => dispatch(removeFromFavorite()),
         setFavoriteCity: () => dispatch(setFavoriteCity()),
     }
 }

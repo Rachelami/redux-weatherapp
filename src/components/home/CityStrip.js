@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import {Wrapper, Strip} from '../../styled/cityStrip'
-import {Star} from '../../styled/shared'
+import { Wrapper, Strip } from '../../styled/cityStrip'
+import { Star } from '../../styled/shared'
 import { useDispatch } from 'react-redux'
-import { fetchcurrentWeather, fetchcurrentWeatherRequest } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
-import { fetchfiveDaysForecasts, fetchfiveDaysForecastsRequest } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
-import { addToFavorite, removeFromFavorite, addFavorite, deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
+import { fetchcurrentWeatherRequest } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
+import { fetchfiveDaysForecastsRequest } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
+import { addFavorite, deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import { connect } from 'react-redux'
 import Weatherinfo from './WeatherInfo'
 import Toast from '../Toast'
-
 
 const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
     const [isFavorite, setIsFavorite] = useState(false)
@@ -35,18 +34,15 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     useEffect(() => {
         if (expended) {
             dispatch(fetchfiveDaysForecastsRequest(city.Key, presentFahrenheit))
-            //DONE dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
         }
     }, [presentFahrenheit])
 
     const favorite = () => {
         if (isFavorite) {
             dispatch(deleteFavorite(city.Key))
-            //DONE dispatch(removeFromFavorite(city.Key))
             setIsFavorite(false)
         } else {
             dispatch(addFavorite(city))
-            //DONE dispatch(addToFavorite(city))
             setIsFavorite(true)
         }
     }
@@ -54,9 +50,7 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     const callFetchWeather = (Key) => {
         if (!expended) {
             dispatch(fetchcurrentWeatherRequest(Key, city.LocalizedName))
-            //DONE dispatch(fetchcurrentWeather(Key, city.LocalizedName))
             dispatch(fetchfiveDaysForecastsRequest(Key, presentFahrenheit))
-            //DONE dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
             setExpended(true)
         }
     }
@@ -74,8 +68,6 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     )
 }
 
-
-
 const mapStateToProps = state => {
     return {
         weather: state.weather,
@@ -87,13 +79,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchcurrentWeatherRequest: () => dispatch(fetchcurrentWeatherRequest()),
-        // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         fetchfiveDaysForecastsRequest: () => dispatch(fetchfiveDaysForecastsRequest()),
-        // fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
         addFavorite: () => dispatch(addFavorite()),
-        // addToFavorite: () => dispatch(addToFavorite()),
         deleteFavorite: () => dispatch(deleteFavorite())
-        // removeFromFavorite: () => dispatch(removeFromFavorite())
     }
 }
 

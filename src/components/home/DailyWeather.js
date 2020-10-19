@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import {OneDay, WeatherIcon} from '../../styled/dailyWeather'
-import {Flex} from '../../styled/shared'
+import { OneDay, WeatherIcon } from '../../styled/dailyWeather'
+import { Flex } from '../../styled/shared'
 
 const DailyWeather = ({ dailyForecast, presentFahrenheit }) => {
     const [day, setDay] = useState([])

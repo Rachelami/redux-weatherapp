@@ -1,8 +1,6 @@
 import {
     SET_FAVORITE_SAGA_CITY,
     RESET_FAVORITE_SAGA_CITY
-    // SET_FAVORITE_CITY,
-    // RESET_FAVORITE_CITY
 } from './getFavoriteCityTypes'
 
 const initialState = {

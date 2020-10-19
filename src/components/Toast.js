@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 
-import {ToastContainer, toast} from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export default function Toast({error, resetError}) {
+export default function Toast({ error, resetError }) {
 	const customId = error
 
 	useEffect(() => {
@@ -17,7 +17,7 @@ export default function Toast({error, resetError}) {
 				draggable: false,
 				progress: undefined,
 				fontSize: 10,
-				onClose: () => {resetError('')}
+				onClose: () => { resetError('') }
 			})
 		}
 	}, [error])
@@ -25,17 +25,17 @@ export default function Toast({error, resetError}) {
 	return (
 		<div>
 			{(error) &&
-			<ToastContainer
-				position="bottom-center"
-				autoClose={3000}
-				hideProgressBar={true}
-				newestOnTop={true}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable={false}
-				pauseOnHover
-			/>}
+				<ToastContainer
+					position="bottom-center"
+					autoClose={3000}
+					hideProgressBar={true}
+					newestOnTop={true}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable={false}
+					pauseOnHover
+				/>}
 		</div >
 	)
 }

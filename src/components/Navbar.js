@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Form } from 'react-bootstrap'
-import {NavLogos, HeroloLogo} from '../styled/navbar'
+import { NavLogos, HeroloLogo } from '../styled/navbar'
 import { useHistory } from "react-router-dom"
 import { connect } from 'react-redux'
 
@@ -14,7 +14,7 @@ const TopNavbar = (favoriteCity) => {
         else {
             setIsFavoritePageActive(false)
         }
-    },[favoriteCity])
+    }, [favoriteCity])
 
     const history = useHistory()
 

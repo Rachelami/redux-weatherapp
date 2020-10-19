@@ -11,7 +11,6 @@ const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
     }
 
     return (
-        // <Wrappery>
         <Wrapper>
             <WeatherWrapper>
                 <Flex>
@@ -33,7 +32,6 @@ const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
                 }
             </FiveDaysContainer>
         </Wrapper>
-        // </Wrappery>
     )
 }
 
