@@ -12,6 +12,8 @@ const fetchCities = async (userInput) => {
             return response.data
         })
         .catch(error => {
+            console.log('error')
+            console.log(error.message)
             return error.message
         })
     return data

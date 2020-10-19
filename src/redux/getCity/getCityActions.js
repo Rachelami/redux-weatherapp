@@ -27,19 +27,19 @@ export const fetchCitiesFailure = error => {
     }
 }
 
-export const fetchCities = (userInput) => {
-    return (dispatch) => {
-        dispatch(fetchCitiesRequest)
-        const cities = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete'
-        const query = `?apikey=${apiKey}&q=${userInput}`
-        axios.get(cities + query)
-            .then(response => {
-                const cities = response.data
-                dispatch(fetchCitiesSuccess(cities))
-            })
-            .catch(error => {
-                const errorMsg = error.message
-                dispatch(fetchCitiesFailure(errorMsg))
-            })
-    }
-}
+// export const fetchCities = (userInput) => {
+//     return (dispatch) => {
+//         dispatch(fetchCitiesRequest)
+//         const cities = 'https://dataservice.accuweather.com/locations/v1/cities/autocomplete'
+//         const query = `?apikey=${apiKey}&q=${userInput}`
+//         axios.get(cities + query)
+//             .then(response => {
+//                 const cities = response.data
+//                 dispatch(fetchCitiesSuccess(cities))
+//             })
+//             .catch(error => {
+//                 const errorMsg = error.message
+//                 dispatch(fetchCitiesFailure(errorMsg))
+//             })
+//     }
+// }

@@ -4,7 +4,7 @@ import {Star} from '../../styled/shared'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather, fetchcurrentWeatherRequest } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecasts, fetchfiveDaysForecastsRequest } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
-import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
+import { addToFavorite, removeFromFavorite, addFavorite, deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import { connect } from 'react-redux'
 import Weatherinfo from './WeatherInfo'
 import Toast from '../Toast'
@@ -41,10 +41,12 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
 
     const favorite = () => {
         if (isFavorite) {
-            // dispatch(removeFromFavorite(city.Key))
+            dispatch(deleteFavorite(city.Key))
+            //DONE dispatch(removeFromFavorite(city.Key))
             setIsFavorite(false)
         } else {
-            // dispatch(addToFavorite(city))
+            dispatch(addFavorite(city))
+            //DONE dispatch(addToFavorite(city))
             setIsFavorite(true)
         }
     }
@@ -88,8 +90,10 @@ const mapDispatchToProps = dispatch => {
         // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         fetchfiveDaysForecastsRequest: () => dispatch(fetchfiveDaysForecastsRequest()),
         // fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
-        addToFavorite: () => dispatch(addToFavorite()),
-        removeFromFavorite: () => dispatch(removeFromFavorite())
+        addFavorite: () => dispatch(addFavorite()),
+        // addToFavorite: () => dispatch(addToFavorite()),
+        deleteFavorite: () => dispatch(deleteFavorite())
+        // removeFromFavorite: () => dispatch(removeFromFavorite())
     }
 }
 

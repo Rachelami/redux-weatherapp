@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
-import { removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
+import { removeFromFavorite, deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import { setFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import Toast from '../Toast'
 
@@ -29,7 +29,8 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
     },[weather])
 
     const favorite = () => {
-        // dispatch(removeFromFavorite(cityWeatherInfo.Key))
+        dispatch(deleteFavorite(cityWeatherInfo.Key))
+        //DONE dispatch(removeFromFavorite(cityWeatherInfo.Key))
         setShowCard(false)
     }
 
@@ -73,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
-        removeFromFavorite: () => dispatch(removeFromFavorite()),
+        deleteFavorite: () => dispatch(deleteFavorite()),
+        // removeFromFavorite: () => dispatch(removeFromFavorite()),
         setFavoriteCity: () => dispatch(setFavoriteCity()),
     }
 }

@@ -1,5 +1,5 @@
-import { apiKey } from '../../api/apiKey'
-import axios from 'axios'
+// import { apiKey } from '../../api/apiKey'
+// import axios from 'axios'
 import {
     FETCH_CURRENT_WEATHER_REQUEST,
     FETCH_CURRENT_WEATHER_SUCCESS,
