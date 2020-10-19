@@ -6,40 +6,42 @@ import {
     FETCH_FIVE_DAYS_FORECASTS_FAILURE
 } from './getFiveDaysForecastsTypes'
 
-export const fetchfiveDaysForecastsRequest = () => {
+export const fetchfiveDaysForecastsRequest = (Key, presentFahrenheit) => {
     return {
-        type: FETCH_FIVE_DAYS_FORECASTS_REQUEST
+        type: FETCH_FIVE_DAYS_FORECASTS_REQUEST,
+        key: Key,
+        presentFahrenheit: presentFahrenheit
     }
 }
 
-const fetchfiveDaysForecastsSuccess = fiveDaysForecasts => {
+export const fetchfiveDaysForecastsSuccess = fiveDaysForecasts => {
     return {
         type: FETCH_FIVE_DAYS_FORECASTS_SUCCESS,
         payload: fiveDaysForecasts
     }
 }
 
-const fetchfiveDaysForecastsFailure = error => {
+export const fetchfiveDaysForecastsFailure = error => {
     return {
         type: FETCH_FIVE_DAYS_FORECASTS_FAILURE,
         payload: error
     }
 }
 
-export const fetchfiveDaysForecasts = (Key, presentFahrenheit) => {
-    return (dispatch) => {
-        dispatch(fetchfiveDaysForecastsRequest)
+// export const fetchfiveDaysForecasts = (Key, presentFahrenheit) => {
+//     return (dispatch) => {
+//         dispatch(fetchfiveDaysForecastsRequest)
 
-        const forecasts = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${Key}`
-        const query = `?apikey=${apiKey}&q=en-us&metric=${!presentFahrenheit}`
-        axios.get(forecasts + query)
-            .then(response => {
-                const fiveDaysForecasts = response.data
-                dispatch(fetchfiveDaysForecastsSuccess(fiveDaysForecasts))
-            })
-            .catch(error => {
-                const errorMsg = error.message
-                dispatch(fetchfiveDaysForecastsFailure(errorMsg))
-            })
-    }
-}
+//         const forecasts = `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${Key}`
+//         const query = `?apikey=${apiKey}&q=en-us&metric=${!presentFahrenheit}`
+//         axios.get(forecasts + query)
+//             .then(response => {
+//                 const fiveDaysForecasts = response.data
+//                 dispatch(fetchfiveDaysForecastsSuccess(fiveDaysForecasts))
+//             })
+//             .catch(error => {
+//                 const errorMsg = error.message
+//                 dispatch(fetchfiveDaysForecastsFailure(errorMsg))
+//             })
+//     }
+// }

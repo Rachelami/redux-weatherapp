@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Wrapper} from '../../styled/favorite'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
+import { fetchcurrentWeather, fetchcurrentWeatherRequest } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
 import FavoriteCard from './FavoriteCard'
 import Toast from '../Toast'
 
@@ -27,10 +27,12 @@ const Favorite = ({ favorites, weather, presentFahrenheit }) => {
                         }
                     }
                     if (!isExist) {
-                        dispatch(fetchcurrentWeather(favoriteCity.Key, favoriteCity.LocalizedName))
+                        dispatch(fetchcurrentWeatherRequest(favoriteCity.Key, favoriteCity.LocalizedName))
+                        //DONE dispatch(fetchcurrentWeather(favoriteCity.Key, favoriteCity.LocalizedName))
                     }
                 } else {
-                    dispatch(fetchcurrentWeather(favoriteCity.Key, favoriteCity.LocalizedName))
+                    dispatch(fetchcurrentWeatherRequest(favoriteCity.Key, favoriteCity.LocalizedName))
+                    //DONE dispatch(fetchcurrentWeather(favoriteCity.Key, favoriteCity.LocalizedName))
                 }
             })
         }
@@ -55,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
+        fetchcurrentWeatherRequest: () => dispatch(fetchcurrentWeatherRequest()),
+        // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
     }
 }
 

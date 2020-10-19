@@ -14,7 +14,7 @@ const Search = () => {
 
     useEffect(() => {
         if (input !== '')
-            // dispatch(fetchCities(input))
+            // DONE - dispatch(fetchCities(input))
             dispatch(fetchCitiesRequest(input))
     }, [input])
 

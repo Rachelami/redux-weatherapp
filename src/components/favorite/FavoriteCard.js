@@ -29,7 +29,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
     },[weather])
 
     const favorite = () => {
-        dispatch(removeFromFavorite(cityWeatherInfo.Key))
+        // dispatch(removeFromFavorite(cityWeatherInfo.Key))
         setShowCard(false)
     }
 
@@ -39,7 +39,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
     }
 
     const goToMainPage = () => {
-        dispatch(setFavoriteCity(cityWeatherInfo))
+        // dispatch(setFavoriteCity(cityWeatherInfo))
     }
 
     return (
@@ -72,7 +72,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
+        // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
         removeFromFavorite: () => dispatch(removeFromFavorite()),
         setFavoriteCity: () => dispatch(setFavoriteCity()),
     }

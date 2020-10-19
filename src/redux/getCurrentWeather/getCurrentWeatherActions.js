@@ -6,13 +6,15 @@ import {
     FETCH_CURRENT_WEATHER_FAILURE
 } from './getCurrentWeatherTypes'
 
-export const fetchcurrentWeatherRequest = () => {
+export const fetchcurrentWeatherRequest = (Key, locationName) => {
     return {
-        type: FETCH_CURRENT_WEATHER_REQUEST
+        type: FETCH_CURRENT_WEATHER_REQUEST,
+        key: Key,
+        locationName: locationName
     }
 }
 
-const fetchcurrentWeatherSuccess = (weather, Key, locationName) => {
+export const fetchcurrentWeatherSuccess = (weather, Key, locationName) => {
     return {
         type: FETCH_CURRENT_WEATHER_SUCCESS,
         id: Key,
@@ -20,26 +22,26 @@ const fetchcurrentWeatherSuccess = (weather, Key, locationName) => {
     }
 }
 
-const fetchcurrentWeatherFailure = error => {
+export const fetchcurrentWeatherFailure = error => {
     return {
         type: FETCH_CURRENT_WEATHER_FAILURE,
         payload: error
     }
 }
 
-export const fetchcurrentWeather = (Key, locationName) => {
-    return (dispatch) => {
-        dispatch(fetchcurrentWeatherRequest)
-        const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/${Key}`
-        const query = `?apikey=${apiKey}&language=en-us`
-        axios.get(currentLocation + query)
-            .then(response => {
-                const weather = response.data
-                dispatch(fetchcurrentWeatherSuccess(weather, Key, locationName))
-            })
-            .catch(error => {
-                const errorMsg = error.message
-                dispatch(fetchcurrentWeatherFailure(errorMsg))
-            })
-    }
-}
+// export const fetchcurrentWeather = (Key, locationName) => {
+//     return (dispatch) => {
+//         dispatch(fetchcurrentWeatherRequest)
+//         const currentLocation = `https://dataservice.accuweather.com/currentconditions/v1/${Key}`
+//         const query = `?apikey=${apiKey}&language=en-us`
+//         axios.get(currentLocation + query)
+//             .then(response => {
+//                 const weather = response.data
+//                 dispatch(fetchcurrentWeatherSuccess(weather, Key, locationName))
+//             })
+//             .catch(error => {
+//                 const errorMsg = error.message
+//                 dispatch(fetchcurrentWeatherFailure(errorMsg))
+//             })
+//     }
+// }

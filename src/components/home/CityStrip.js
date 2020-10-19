@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import {Wrapper, Strip} from '../../styled/cityStrip'
 import {Star} from '../../styled/shared'
 import { useDispatch } from 'react-redux'
-import { fetchcurrentWeather } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
-import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
+import { fetchcurrentWeather, fetchcurrentWeatherRequest } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
+import { fetchfiveDaysForecasts, fetchfiveDaysForecastsRequest } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
 import { addToFavorite, removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import { connect } from 'react-redux'
 import Weatherinfo from './WeatherInfo'
@@ -34,24 +34,27 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
 
     useEffect(() => {
         if (expended) {
-            dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
+            dispatch(fetchfiveDaysForecastsRequest(city.Key, presentFahrenheit))
+            //DONE dispatch(fetchfiveDaysForecasts(city.Key, presentFahrenheit))
         }
     }, [presentFahrenheit])
 
     const favorite = () => {
         if (isFavorite) {
-            dispatch(removeFromFavorite(city.Key))
+            // dispatch(removeFromFavorite(city.Key))
             setIsFavorite(false)
         } else {
-            dispatch(addToFavorite(city))
+            // dispatch(addToFavorite(city))
             setIsFavorite(true)
         }
     }
 
     const callFetchWeather = (Key) => {
         if (!expended) {
-            dispatch(fetchcurrentWeather(Key, city.LocalizedName))
-            dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
+            dispatch(fetchcurrentWeatherRequest(Key, city.LocalizedName))
+            //DONE dispatch(fetchcurrentWeather(Key, city.LocalizedName))
+            dispatch(fetchfiveDaysForecastsRequest(Key, presentFahrenheit))
+            //DONE dispatch(fetchfiveDaysForecasts(Key, presentFahrenheit))
             setExpended(true)
         }
     }
@@ -81,8 +84,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
-        fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
+        fetchcurrentWeatherRequest: () => dispatch(fetchcurrentWeatherRequest()),
+        // fetchcurrentWeather: () => dispatch(fetchcurrentWeather()),
+        fetchfiveDaysForecastsRequest: () => dispatch(fetchfiveDaysForecastsRequest()),
+        // fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
         addToFavorite: () => dispatch(addToFavorite()),
         removeFromFavorite: () => dispatch(removeFromFavorite())
     }

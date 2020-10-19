@@ -3,7 +3,7 @@ import { Card, Header, DayNight, MiddleWrapper } from '../../styled/favoriteCity
 import {FiveDaysContainer, Star, WeatherIcon} from '../../styled/shared'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { fetchfiveDaysForecasts } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
+import { fetchfiveDaysForecasts, fetchfiveDaysForecastsRequest } from '../../redux/getFiveDaysForecasts/getFiveDaysForecastsActions'
 import { removeFromFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import DailyWeather from '../home/DailyWeather'
 import Toast from '../Toast'
@@ -22,12 +22,13 @@ const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecast
     }, [fiveDaysForecasts])
 
     useEffect(() => {
-        dispatch(fetchfiveDaysForecasts(cityCard.Key, presentFahrenheit))
+        dispatch(fetchfiveDaysForecastsRequest(cityCard.Key, presentFahrenheit))
+        //DONE dispatch(fetchfiveDaysForecasts(cityCard.Key, presentFahrenheit))
     }, [presentFahrenheit])
 
     const favorite = () => {
         setIsFavorite(false)
-        dispatch(removeFromFavorite(cityCard.Key))
+        // dispatch(removeFromFavorite(cityCard.Key))
     }
 
     const capitalize = (string) => {
@@ -77,7 +78,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
+        fetchfiveDaysForecastsRequest: () => dispatch(fetchfiveDaysForecastsRequest()),
+        // fetchfiveDaysForecasts: () => dispatch(fetchfiveDaysForecasts()),
         removeFromFavorite: () => dispatch(removeFromFavorite())
     }
 }
