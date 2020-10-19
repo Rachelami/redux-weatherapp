@@ -4,6 +4,7 @@ import { FETCH_CITIES_REQUEST } from './getCity/getCityTypes'
 import { FETCH_CURRENT_WEATHER_REQUEST } from './getCurrentWeather/getCurrentWeatherTypes'
 import { FETCH_FIVE_DAYS_FORECASTS_REQUEST } from './getFiveDaysForecasts/getFiveDaysForecastsTypes'
 import { ADD_FAVORITE, DELETE_FAVORITE } from './getFavorite/getFavoriteTypes'
+import { SET_FAVORITE_CITY, RESET_FAVORITE_CITY } from './getFavoriteCity/getFavoriteCityTypes'
 
 import { fetchCities, fetchcurrentWeather, fetchfiveDaysForecasts } from './api/fetchApi'
 
@@ -11,6 +12,7 @@ import { fetchCitiesSuccess, fetchCitiesFailure } from './getCity/getCityActions
 import { fetchcurrentWeatherSuccess, fetchcurrentWeatherFailure } from './getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecastsSuccess, fetchfiveDaysForecastsFailure } from './getFiveDaysForecasts/getFiveDaysForecastsActions'
 import { addToFavorite, removeFromFavorite } from './getFavorite/getFavoriteActions'
+import { setFavoriteSagaCity, resetFavoriteSagaCity } from './getFavoriteCity/getFavoriteCityActions'
 
 function* handleGetCitiesRequest(action) {
     try {
@@ -41,12 +43,17 @@ function* handleGetFiveDayForcastRequest(action) {
     }
 }
 function* handleAddToFavorite(action) {
-        yield put(addToFavorite(action.payload))
-
+    yield put(addToFavorite(action.payload))
 }
 function* handleRemoveFromFavorite(action) {
-        yield put(removeFromFavorite(action.payload))
+    yield put(removeFromFavorite(action.payload))
+}
 
+function* handleSetFavoriteCity(action) {
+    yield put(setFavoriteSagaCity(action.payload))
+}
+function* handleResetFavoriteCity() {
+    yield put(resetFavoriteSagaCity())
 }
 
 function* rootSaga() {
@@ -55,6 +62,8 @@ function* rootSaga() {
     yield takeEvery(FETCH_FIVE_DAYS_FORECASTS_REQUEST, handleGetFiveDayForcastRequest)
     yield takeEvery(ADD_FAVORITE, handleAddToFavorite)
     yield takeEvery(DELETE_FAVORITE, handleRemoveFromFavorite)
+    yield takeEvery(SET_FAVORITE_CITY, handleSetFavoriteCity)
+    yield takeEvery(RESET_FAVORITE_CITY, handleResetFavoriteCity)
 }
 
 export default rootSaga

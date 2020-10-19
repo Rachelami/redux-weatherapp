@@ -21,7 +21,7 @@ const Search = () => {
     const handleChange = (event) => {
         if (verifyInput(event.target.value)) {
             setInput(event.target.value)
-            // dispatch(resetFavoriteCity())
+            dispatch(resetFavoriteCity())
         } else {
             setErrorMessage('Invalid Character')
         }

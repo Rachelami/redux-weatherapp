@@ -40,7 +40,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
     }
 
     const goToMainPage = () => {
-        // dispatch(setFavoriteCity(cityWeatherInfo))
+        dispatch(setFavoriteCity(cityWeatherInfo))
     }
 
     return (
