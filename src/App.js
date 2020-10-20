@@ -16,7 +16,6 @@ function App({ isDark }) {
   }
 
   return (
-
     <AppWrap dark={isDark.isDark}>
       <TopNavbar />
       <Toggle changeToggle={checkToggle} />

@@ -1,32 +1,32 @@
 import {
-    FETCH_CITIES_REQUEST,
-    FETCH_CITIES_SUCCESS,
-    FETCH_CITIES_FAILURE
-} from './getCityTypes'
+    FETCH_GEOLOCATION_REQUEST,
+    FETCH_GEOLOCATION_SUCCESS,
+    FETCH_GEOLOCATION_FAILURE
+} from './getGeoLocationTypes'
 
 const initialState = {
     loading: false,
-    cities: [],
+    coords: null,
     error: ''
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_CITIES_REQUEST:
+        case FETCH_GEOLOCATION_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case FETCH_CITIES_SUCCESS:
+        case FETCH_GEOLOCATION_SUCCESS:
             return {
                 loading: false,
-                cities: action.payload,
+                coords: action.payload,
                 error: ''
             }
-        case FETCH_CITIES_FAILURE:
+        case FETCH_GEOLOCATION_FAILURE:
             return {
                 loading: false,
-                cities: [],
+                coords: [],
                 error: action.payload
             }
         default: return state

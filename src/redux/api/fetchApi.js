@@ -41,3 +41,16 @@ export const fetchfiveDaysForecasts = async (Key, presentFahrenheit) => {
         })
     return data
 }
+
+export const fetchGeolocation = async (coords) => {
+    const geoposition = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search'
+    const query = `?apikey=${apiKey}&q=${coords}`
+    const data = await axios.get(geoposition + query)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            return error.message
+        })
+    return data
+}

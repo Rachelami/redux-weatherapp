@@ -1,5 +1,5 @@
 import { takeEvery, put, call } from 'redux-saga/effects'
-import { fetchCities, fetchcurrentWeather, fetchfiveDaysForecasts } from './api/fetchApi'
+import { fetchCities, fetchcurrentWeather, fetchfiveDaysForecasts, fetchGeolocation } from './api/fetchApi'
 
 import { FETCH_CITIES_REQUEST } from './getCity/getCityTypes'
 import { FETCH_CURRENT_WEATHER_REQUEST } from './getCurrentWeather/getCurrentWeatherTypes'
@@ -7,10 +7,12 @@ import { FETCH_FIVE_DAYS_FORECASTS_REQUEST } from './getFiveDaysForecasts/getFiv
 import { ADD_FAVORITE, DELETE_FAVORITE } from './getFavorite/getFavoriteTypes'
 import { SET_FAVORITE_CITY, RESET_FAVORITE_CITY } from './getFavoriteCity/getFavoriteCityTypes'
 import { SET_DARK_VIEW } from './darkView/darkViewTypes'
+import { FETCH_GEOLOCATION_REQUEST } from './getGeoLocation/getGeoLocationTypes'
 
 import { fetchCitiesSuccess, fetchCitiesFailure } from './getCity/getCityActions'
 import { fetchcurrentWeatherSuccess, fetchcurrentWeatherFailure } from './getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecastsSuccess, fetchfiveDaysForecastsFailure } from './getFiveDaysForecasts/getFiveDaysForecastsActions'
+import { fetchGeoLocationSuccess, fetchGeoLocationFailure } from './getGeoLocation/getGeoLocationActions'
 import { addToFavorite, removeFromFavorite } from './getFavorite/getFavoriteActions'
 import { setFavoriteSagaCity, resetFavoriteSagaCity } from './getFavoriteCity/getFavoriteCityActions'
 import { setSagaDarkView } from './darkView/darkViewActions'
@@ -43,6 +45,15 @@ function* handleGetFiveDayForcastRequest(action) {
     }
 }
 
+function* handleGeoLocationRequest(action) {
+    const geoLocation = yield call(fetchGeolocation, action.coords)
+    if (typeof (geoLocation) === "object") {
+        yield put(fetchGeoLocationSuccess(geoLocation))
+    } else {
+        yield put(fetchGeoLocationFailure(geoLocation))
+    }
+}
+
 function* handleAddToFavorite(action) {
     yield put(addToFavorite(action.payload))
 }
@@ -72,6 +83,7 @@ function* rootSaga() {
     yield takeEvery(SET_FAVORITE_CITY, handleSetFavoriteCity)
     yield takeEvery(RESET_FAVORITE_CITY, handleResetFavoriteCity)
     yield takeEvery(SET_DARK_VIEW, handleSetDarkView)
+    yield takeEvery(FETCH_GEOLOCATION_REQUEST, handleGeoLocationRequest)
 }
 
 export default rootSaga
