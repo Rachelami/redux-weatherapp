@@ -53,7 +53,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit, 
                         {presentFahrenheit ?
                             <Card.Text>{Math.round(cityWeatherInfo.Temperature.Imperial.Value)}&deg;F</Card.Text> :
                             <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}
-                        <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link>
+                        <Link to="/" onClick={() => goToMainPage()}>See Forecast</Link>
                     </Card.Body>
                 </FavoriteCardWrapper >
             }
