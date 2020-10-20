@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { OneDay, WeatherIcon } from '../../styled/dailyWeather'
 import { Flex } from '../../styled/shared'
+import { connect } from 'react-redux'
 
-const DailyWeather = ({ dailyForecast, presentFahrenheit }) => {
+const DailyWeather = ({ dailyForecast, presentFahrenheit, isDark }) => {
     const [day, setDay] = useState([])
     const daysInWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -13,7 +14,7 @@ const DailyWeather = ({ dailyForecast, presentFahrenheit }) => {
     }, [])
 
     return (
-        <OneDay >
+        <OneDay dark={isDark.isDark}>
             <WeatherIcon src={process.env.PUBLIC_URL + `/images/weather-icons/${dailyForecast.Day.Icon}.svg`} />
             <Flex>
                 <div>{Math.round(dailyForecast.Temperature.Minimum.Value)}&deg;{presentFahrenheit ? 'F' : 'C'} -</div>
@@ -24,4 +25,12 @@ const DailyWeather = ({ dailyForecast, presentFahrenheit }) => {
     )
 }
 
-export default DailyWeather
+const mapStateToProps = state => {
+    return {
+      isDark: state.isDark
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+  )(DailyWeather)

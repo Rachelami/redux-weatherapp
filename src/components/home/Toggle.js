@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
-import {Celsius, Fahrenheit, SwitchWrapper} from '../../styled/toggle'
+import { Celsius, Fahrenheit, SwitchWrapper } from '../../styled/toggle'
+import { connect } from 'react-redux'
 
 const Toggle = (props) => {
     const [presentFahrenheit, setPresentFahrenheit] = useState(false)
+    const isDark = props.isDark.isDark
 
     const switchToFahrenheit = (event) => {
         setPresentFahrenheit(event.target.checked)
@@ -14,8 +16,8 @@ const Toggle = (props) => {
     }, [presentFahrenheit])
 
     return (
-        <SwitchWrapper>
-            <Celsius>{presentFahrenheit && 'Celsius'}</Celsius>
+        <SwitchWrapper degree>
+            <Celsius dark={isDark}>{presentFahrenheit && 'Celsius'}</Celsius>
             <Form>
                 <Form.Check
                     type="switch"
@@ -24,9 +26,17 @@ const Toggle = (props) => {
                     onChange={switchToFahrenheit}
                 />
             </Form>
-            <Fahrenheit>{!presentFahrenheit && 'Fahrenheit'}</Fahrenheit>
+            <Fahrenheit dark={isDark}>{!presentFahrenheit && 'Fahrenheit'}</Fahrenheit>
         </SwitchWrapper>
     )
 }
 
-export default Toggle
+const mapStateToProps = state => {
+    return {
+        isDark: state.isDark
+    }
+}
+
+export default connect(
+    mapStateToProps,
+)(Toggle)

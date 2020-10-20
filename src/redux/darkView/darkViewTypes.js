@@ -1,0 +1,2 @@
+export const SET_DARK_VIEW = 'DARK_VIEW'
+export const SET_SAGA_DARK_VIEW = 'SAGA_DARK_VIEW'

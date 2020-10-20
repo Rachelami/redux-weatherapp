@@ -10,6 +10,11 @@ export const Wrapper = styled.div`
 `
 export const Input = styled(FormControl)`
     border-radius: ${props => props.theme.cardRadius} !important;
+    ${props => {
+        if (props.dark === 'true') {
+            return `background-color: ${props.theme.darkgray};`
+        }
+    }}
     @media (min-width: 670px) {
         width: 50vw !important;
     }

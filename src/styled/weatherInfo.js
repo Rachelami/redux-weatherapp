@@ -8,6 +8,11 @@ export const Wrapper = styled.div`
     margin: 5px;
     background-color: floralwhite;
     box-shadow: 4px 4px 5px #aaaaaa;
+    ${props => {
+        if (props.dark) {
+            return `background-color: ${props.theme.darkgray};`
+        }
+    }}
     &:focus {
         outline: none;
     }

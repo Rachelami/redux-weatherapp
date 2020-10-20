@@ -9,6 +9,11 @@ export const OneDay = styled.div`
     width: 18%;
     padding: 10px 5px;
     background-color: moccasin;
+    ${props => {
+        if (props.dark) {
+            return `background-color: gray;`
+        }
+    }}
     @media (max-width: 970px) {
         width: 100%;
         flex-direction: row;

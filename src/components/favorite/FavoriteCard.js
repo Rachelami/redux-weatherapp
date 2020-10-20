@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Card } from 'react-bootstrap'
 import { Star, WeatherIcon } from '../../styled/shared'
+import { FavoriteCardWrapper } from '../../styled/favoriteCard'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -8,7 +9,7 @@ import { deleteFavorite } from '../../redux/getFavorite/getFavoriteActions'
 import { setFavoriteCity } from '../../redux/getFavoriteCity/getFavoriteCityActions'
 import Toast from '../Toast'
 
-const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }) => {
+const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit, isDark }) => {
     const [showCard, setShowCard] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
     const dispatch = useDispatch()
@@ -44,7 +45,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
     return (
         <>
             {showCard &&
-                <Card>
+                <FavoriteCardWrapper dark={isDark.isDark}>
                     <Star favoriteCard src={process.env.PUBLIC_URL + '/images/yellow-star.png'} onClick={() => favorite()} />
                     <Card.Body>
                         <Card.Title>{capitalize(cityWeatherInfo.locationName)}</Card.Title>
@@ -54,7 +55,7 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
                             <Card.Text>{Math.round(cityWeatherInfo.Temperature.Metric.Value)}&deg;C</Card.Text>}
                         <Link to="/" onClick={() => goToMainPage()}>See Forcast</Link>
                     </Card.Body>
-                </Card >
+                </FavoriteCardWrapper >
             }
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
         </>
@@ -65,7 +66,8 @@ const FavoriteCard = ({ cityWeatherInfo, weather, favorites, presentFahrenheit }
 const mapStateToProps = state => {
     return {
         weather: state.weather,
-        favorites: state.favorites
+        favorites: state.favorites,
+        isDark: state.isDark
     }
 }
 

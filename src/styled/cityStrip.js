@@ -29,3 +29,11 @@ export const Strip = styled.button`
         width: 93vw !important;
     }
 `
+
+export const CityName = styled.div`
+ ${props => {
+        if (props.dark) {
+            return `color: white;`
+        }
+    }}
+`

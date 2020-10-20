@@ -11,6 +11,11 @@ export const Card = styled.div`
     align-items: center;
     position: relative;
     background-color: white;
+    ${props => {
+        if (props.dark) {
+            return `background-color: gainsboro`
+        }
+    }}
 `
 export const Header = styled.div`
     display: flex;

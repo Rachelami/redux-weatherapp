@@ -2,8 +2,9 @@ import React from 'react'
 import { Wrapper, WeatherWrapper, WeatherIcon } from '../../styled/weatherInfo'
 import { Flex, FiveDaysContainer } from '../../styled/shared'
 import DailyWeather from './DailyWeather'
+import { connect } from 'react-redux'
 
-const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
+const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit, isDark }) => {
 
     const capitalize = (string) => {
         if (typeof string !== 'string') return ''
@@ -11,7 +12,7 @@ const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper dark={isDark.isDark}>
             <WeatherWrapper>
                 <Flex>
                     <WeatherIcon src={process.env.PUBLIC_URL + `/images/weather-icons/${weather.WeatherIcon}.svg`} />
@@ -35,4 +36,12 @@ const Weatherinfo = ({ fiveDaysForecasts, weather, presentFahrenheit }) => {
     )
 }
 
-export default Weatherinfo
+const mapStateToProps = state => {
+    return {
+      isDark: state.isDark
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+  )(Weatherinfo)

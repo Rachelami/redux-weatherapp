@@ -9,7 +9,7 @@ import DailyWeather from '../home/DailyWeather'
 import Toast from '../Toast'
 
 
-const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecasts }) => {
+const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecasts, isDark }) => {
     const [errorMessage, setErrorMessage] = useState('')
     const [isFavorite, setIsFavorite] = useState(true)
     const dispatch = useDispatch()
@@ -38,7 +38,7 @@ const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecast
     return (
         <>
             {isFavorite &&
-                <Card>
+                <Card dark={isDark.isDark}>
                     <Header>
                         <DayNight src={cityCard.IsDayTime ? process.env.PUBLIC_URL + '/images/day.gif' : process.env.PUBLIC_URL + '/images/night.gif'} />
                         <Star favoriteCityDetails src={process.env.PUBLIC_URL + '/images/yellow-star.png'} onClick={() => favorite()} />
@@ -71,7 +71,8 @@ const FavoriteCityDetails = ({ presentFahrenheit, favoriteCity, fiveDaysForecast
 const mapStateToProps = state => {
     return {
         favoriteCity: state.favoriteCity,
-        fiveDaysForecasts: state.fiveDaysForecasts
+        fiveDaysForecasts: state.fiveDaysForecasts, 
+        isDark: state.isDark
     }
 }
 

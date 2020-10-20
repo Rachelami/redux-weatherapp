@@ -6,12 +6,14 @@ import { FETCH_CURRENT_WEATHER_REQUEST } from './getCurrentWeather/getCurrentWea
 import { FETCH_FIVE_DAYS_FORECASTS_REQUEST } from './getFiveDaysForecasts/getFiveDaysForecastsTypes'
 import { ADD_FAVORITE, DELETE_FAVORITE } from './getFavorite/getFavoriteTypes'
 import { SET_FAVORITE_CITY, RESET_FAVORITE_CITY } from './getFavoriteCity/getFavoriteCityTypes'
+import { SET_DARK_VIEW } from './darkView/darkViewTypes'
 
 import { fetchCitiesSuccess, fetchCitiesFailure } from './getCity/getCityActions'
 import { fetchcurrentWeatherSuccess, fetchcurrentWeatherFailure } from './getCurrentWeather/getCurrentWeatherActions'
 import { fetchfiveDaysForecastsSuccess, fetchfiveDaysForecastsFailure } from './getFiveDaysForecasts/getFiveDaysForecastsActions'
 import { addToFavorite, removeFromFavorite } from './getFavorite/getFavoriteActions'
 import { setFavoriteSagaCity, resetFavoriteSagaCity } from './getFavoriteCity/getFavoriteCityActions'
+import { setSagaDarkView } from './darkView/darkViewActions'
 
 
 function* handleGetCitiesRequest(action) {
@@ -57,6 +59,10 @@ function* handleResetFavoriteCity() {
     yield put(resetFavoriteSagaCity())
 }
 
+function* handleSetDarkView(action) {
+    yield put(setSagaDarkView(action.payload))
+}
+
 function* rootSaga() {
     yield takeEvery(FETCH_CITIES_REQUEST, handleGetCitiesRequest)
     yield takeEvery(FETCH_CURRENT_WEATHER_REQUEST, handleGetCurrentWeatherRequest)
@@ -65,6 +71,7 @@ function* rootSaga() {
     yield takeEvery(DELETE_FAVORITE, handleRemoveFromFavorite)
     yield takeEvery(SET_FAVORITE_CITY, handleSetFavoriteCity)
     yield takeEvery(RESET_FAVORITE_CITY, handleResetFavoriteCity)
+    yield takeEvery(SET_DARK_VIEW, handleSetDarkView)
 }
 
 export default rootSaga

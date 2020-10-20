@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Wrapper, Strip } from '../../styled/cityStrip'
+import { Wrapper, Strip, CityName } from '../../styled/cityStrip'
 import { Star } from '../../styled/shared'
 import { useDispatch } from 'react-redux'
 import { fetchcurrentWeatherRequest } from '../../redux/getCurrentWeather/getCurrentWeatherActions'
@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import Weatherinfo from './WeatherInfo'
 import Toast from '../Toast'
 
-const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather }) => {
+const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weather, isDark }) => {
     const [isFavorite, setIsFavorite] = useState(false)
     const [expended, setExpended] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
@@ -58,7 +58,7 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
     return (
         <Wrapper>
             <Strip onClick={() => callFetchWeather(city.Key)}>
-                <div>{city.LocalizedName}</div>
+                <CityName dark={isDark.isDark}>{city.LocalizedName}</CityName >
                 {weather.id === city.Key && fiveDaysForecasts && expended &&
                     < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} presentFahrenheit={presentFahrenheit} />}
             </Strip>
@@ -72,7 +72,8 @@ const mapStateToProps = state => {
     return {
         weather: state.weather,
         fiveDaysForecasts: state.fiveDaysForecasts,
-        favorites: state.favorites
+        favorites: state.favorites,
+        isDark: state.isDark
     }
 }
 
