@@ -12,11 +12,13 @@ export const FiveDaysContainer = styled.div`
     }
 `
 export const Star = styled.img`
-    position: absolute;
-    height: 20px;
-    
+  position: absolute;
+  height: 20px;
+  transition: all 0.3s ease-out;
+  transform: ${props => (props.rotate === 'true' ? `rotate(180deg)` : "")};
     ${props => {
         if (props.cityStrip) {
+            console.log('city############')
             return `right: 14%;
                     top: 5px;`
         }

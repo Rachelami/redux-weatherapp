@@ -62,7 +62,7 @@ const CityStrip = ({ city, favorites, presentFahrenheit, fiveDaysForecasts, weat
                 {weather.id === city.Key && fiveDaysForecasts && expended &&
                     < Weatherinfo fiveDaysForecasts={fiveDaysForecasts} weather={weather.currentWeather[0][0][0]} presentFahrenheit={presentFahrenheit} />}
             </Strip>
-            <Star cityStrip src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} onClick={() => favorite()} />
+            <Star cityStrip rotate={isFavorite.toString()} src={isFavorite ? process.env.PUBLIC_URL + '/images/yellow-star.png' : process.env.PUBLIC_URL + '/images/star.png'} onClick={() => favorite()} />
             {errorMessage && <Toast error={errorMessage} resetError={setErrorMessage} />}
         </Wrapper>
     )

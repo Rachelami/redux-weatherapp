@@ -20,6 +20,12 @@ function CitiesContainer({ cities, presentFahrenheit, favoriteCity, geoLocation 
     }, [])
 
     useEffect(() => {
+        if (geoLocation.error) {
+            setErrorMessage(geoLocation.error)
+        }
+    }, [geoLocation])
+
+    useEffect(() => {
         if (coords) {
             dispatch(fetchGeoLocationRequest(coords))
         }
@@ -72,7 +78,7 @@ function CitiesContainer({ cities, presentFahrenheit, favoriteCity, geoLocation 
                         cities.cities.length !== 0 ?
                             cities.cities.map((city) =>
                                 <CityStrip key={city.Key} city={city} presentFahrenheit={presentFahrenheit} />) :
-                            geoLocation.coords &&
+                            (geoLocation.coords && !geoLocation.error) &&
                             <CityStrip key={geoLocation.coords.Key} city={geoLocation.coords} presentFahrenheit={presentFahrenheit} />
                     }
                 </div>}
