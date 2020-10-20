@@ -24,7 +24,7 @@ export const SwitchWrapper = styled.div`
             return `padding-top: 20px;`
         }
         if (props.dark) {
-            return `padding-right: 20px;`
+            return `padding-right: 10px;`
         }
     }}
 ` 

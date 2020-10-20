@@ -1,4 +1,4 @@
-import { apiKey } from '../../api/apiKey'
+import { apiKey } from './apiKey'
 import axios from 'axios'
 
 
@@ -43,7 +43,7 @@ export const fetchfiveDaysForecasts = async (Key, presentFahrenheit) => {
 }
 
 export const fetchGeolocation = async (coords) => {
-    const geoposition = 'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search'
+    const geoposition = 'https://dataservice.accuweather.com/locations/v1/cities/geoposition/search'
     const query = `?apikey=${apiKey}&q=${coords}`
     const data = await axios.get(geoposition + query)
         .then(response => {
